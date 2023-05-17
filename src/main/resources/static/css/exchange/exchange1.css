@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.explain:before {
+    position: absolute;
+    width: 35px;
+    height: 2px;
+    background-color: darkgreen;
+    content: "";
+}
+
+.card:hover {
+    border: 2px solid dodgerblue;
+}
+
+table {
+    width: 100%;
+    border-top: 1px solid green;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+table > thead > tr {
+    height: 50px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+table > tbody > tr {
+    height: 50px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+table > tbody > tr > td {
+    color: gray;
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}"
+      layout:fragment="content">
+
+<link rel="stylesheet" href="/css/pickUp.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body>
+  <div class="container-fluid" style="padding: 0;">
+    <!--    전체 컨테이너   -->
+    <div class="container_content_all">
+      <!--   상단 배너 이미지   -->
+      <div>
+        <img class="img_header" src="/img/pickup/pickup_recycle.png" alt="픽업 상단 이미지">
+        <div class="textDiv_header">
+          <div class="text_header">배출 신청</div>
+        </div>
+      </div>
+      <!--   페이지별 단계   -->
+      <div class="container" style="margin-top: 55px;">
+        <div class="row box_step">
+          <div class="col-3" style="margin-right: 2%;"></div>
+          <div class="col-2">
+            <div class="circle_nextStep" id="line_stepConnect"><i class="fa-regular fa-pen-to-square"></i></div>
+            <div class="text_step">1단계<br><div style="font-family: NanumBarunGothic, serif;">기본정보 입력</div></div>
+          </div>
+          <div class="col-2">
+            <div class="circle_nextStep" id="line_stepConnect2"><i class="fa-solid fa-recycle"></i></div>
+            <div class="text_step">2단계<br><div style="font-family: NanumBarunGothic, serif;">배출품목 입력</div></div>
+          </div>
+          <div class="col-2">
+            <div class="circle_currentStep"><i class="fa-solid fa-check"></i></div>
+            <div class="text_step">3단계<br><div style="font-family: NanumBarunGothic, serif;">예약 확인</div></div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+      <!--   메인 컨텐츠  -->
+      <div class="container_content">
+        <div class="container">
+          <div style="width: 92%; margin-left: 3%;">
+            <span class="text_page2Title">선택품목 확인</span>
+          </div>
+        </div>
+        <!--  품목 선택 preview  -->
+        <div class="container">
+          <!--  품목 선택 preview 세부 title  -->
+          <table style="border: 2px solid #d5d2d2; margin-top: 40px; width: 92%; margin-left: 4%;">
+            <thead>
+            <tr style="border-bottom: 2px solid #d5d2d2; height: 65px;">
+              <td class="col-4" style="border-right: 2px solid #d5d2d2">
+                <div class="text_cateSelectTitle2">상세 분류</div>
+              </td>
+              <td class="col-4" style="border-right: 2px solid #d5d2d2">
+                <div class="text_cateSelectTitle2">수량</div>
+              </td>
+            </tr>
+            </thead>
+            <tbody id="previewCategory">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--  품목 선택과 개인정보 구분선  -->
+      <div class="container">
+        <div class="line_boundary"></div>
+      </div>
+      <!--   개인정보 확인칸  -->
+      <div class="container">
+        <!--   개인정보 확인 title -->
+        <div class="container">
+          <div style="width: 92%; margin-left: 3%;">
+            <span class="text_page2Title">예약정보 확인</span>
+          </div>
+        </div>
+        <!--   개인정보 확인 본문  -->
+        <div class="row" style="color: black; margin-top: 40px; width: 92%; margin-left: 5%;">
+          <table>
+            <!--   접수자명  -->
+            <tr>
+              <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px; padding: 28px;">
+                <span class="text_contentHeader">접수자명</span>
+                <span class="text_requiredInput">*</span>
+              </td>
+              <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                <input id="username" type="text" name="pickup_name" th:value="${session.address.pu_address_name}" style="width: 300px; height: 40px; margin-left: 20px; font-size: 20px;" readonly>
+              </td>
+            </tr>
+            <!--   전화번호  -->
+            <tr>
+              <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px; padding: 28px;">
+                <span class="text_contentHeader">전화번호</span>
+                <span class="text_requiredInput">*</span>
+              </td>
+              <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                <input type="text" name="pickup_phone" th:value="${session.address.pu_address_tel}" style="width: 300px; height: 40px; margin-left: 20px; font-size: 20px;" readonly>
+              </td>
+            </tr>
+            <!--   배출 주소  -->
+            <tr>
+              <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                <span class="text_contentHeader">배출 주소</span>
+                <span class="text_requiredInput">*</span>
+              </td>
+              <td class="col-10 box_address" style="border: 1px solid #c1baba; padding: 30px; font-family: NanumBarunGothic, serif; font-size: 17px;">
+                <input type="text" name="pickup_zip_code" id="sample4_postcode" th:value="${session.address.pu_address_zip}" placeholder="${session.pu_zip}" readonly><br>
+                <input type="text" name="pickup_address1" id="sample4_roadAddress" th:value="${session.address.pu_address1}" placeholder="${session.pu_address1}" readonly>
+                <input type="text" name="pickup_address2" id="sample4_jibunAddress" th:value="${session.address.pu_address2}" placeholder="${session.pu_address2}" readonly><br>
+                <span id="guide" style="color:#999;display:none"></span>
+                <input type="text" name="pickup_address3" id="sample4_detailAddress" th:value="${session.address.pu_address3}" placeholder="${session.pu_address3}" readonly>
+                <input type="text" name="pickup_address4" id="sample4_extraAddress" th:value="${session.address.pu_address4}" placeholder="${session.pu_address4}" readonly>
+              </td>
+            </tr>
+            <!--   주거 구분  -->
+            <tr>
+              <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                <span class="text_contentHeader">주거 구분</span>
+                <span class="text_requiredInput">*</span>
+              </td>
+              <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif; font-size: 20px; height: 85px;">
+                <div style="display:flex; margin-left: 20px;">
+                  <div>주거형태</div>
+                  <select name="pickup_house" title="주거형태 선택" style="margin-left: 10px; margin-right: 20px;" readonly>
+                    <option th:selected="${session.info.house_no==1}" value="단층주택">단층주택</option>
+                    <option th:selected="${session.info.house_no==2}" value="연립주택">연립주택</option>
+                    <option th:selected="${session.info.house_no==3}" value="아파트">아파트</option>
+                    <option th:selected="${session.info.house_no==4}" value="빌딩">빌딩</option>
+                  </select>
+                  <div>엘리베이터 유무</div>
+                  <select name="pickup_elevator" title="엘리베이터유무 선택" style="margin-left: 10px; margin-right: 20px;" readonly>
+                    <option th:selected="${session.info.pu_elevator=='Y'}" value="있음">있음</option>
+                    <option th:selected="${session.info.pu_elevator=='N'}" value="없음">없음</option>
+                  </select>
+
+                </div>
+              </td>
+            </tr>
+            <!--   배출 희망일  -->
+            <tr>
+              <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px; padding: 20px;">
+                <span class="text_contentHeader">배출<br>희망일</span>
+                <span class="text_requiredInput">*</span>
+              </td>
+              <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                <div style="display:flex; margin-left: 20px; font-size: 20px;">
+                  지정일: [[${session.info.pu_day}]]
+                </div>
+              </td>
+            </tr>
+            <!--   참고 사진  -->
+            <tr>
+              <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                <div class="text_contentHeader">참고 사진</div>
+              </td>
+              <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                <div id="img_pickup_preview" style="height: 150px; margin: 15px;">
+                </div>
+              </td>
+            </tr>
+            <!--   메모  -->
+            <tr>
+              <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                <div class="text_contentHeader">메모</div>
+              </td>
+              <td class="col-10" style="border: 1px solid #c1baba; padding: 30px; font-family: NanumBarunGothic, serif;">
+                <div id="text_memo_div" style="display:flex;">
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!--   페이지 저장 및 이동  -->
+      <div class="container">
+        <div class="box_pageMove">
+          <a href="/pickup2" class="btn btn-outline-success">이전</a>
+          <a href="/pickupRealSave" class="btn btn-outline-success">접수하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="/js/pickUp3.js"></script>
+<script th:inline="javascript">
+  // 모델에서 items 값을 가져옵니다
+  const items = [[${items}]];
+  const previewBody = document.querySelector('#previewCategory');
+
+  // items 리스트를 순회하며, tr 태그를 생성하고 previewBody에 추가합니다
+  items.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+  <td class="col-4" style="border-right: 2px solid #d5d2d2; font-family: NanumBarunGothic, serif;">
+    <div class="text_detailCategory_preview">${item.categoryVal}</div>
+  </td>
+  <td class="col-4"
+      style="border-right: 2px solid #d5d2d2; text-align: center; font-size: 25px; color: black; font-family: NanumBarunGothic, serif;">
+    <div>${item.countVal}</div>
+  </td>
+  `;
+    tr.setAttribute('style', 'height: 65px; border-bottom: 2px solid #d5d2d2;'); // 스타일 속성 추가
+    previewBody.appendChild(tr);
+  });
+
+  const pu_memo = [[${session.info.pu_memo}]];
+  const previewMemo = document.querySelector('#text_memo_div');
+
+  if (pu_memo === 'None') {
+    const ta = document.createElement('textarea');
+    ta.innerHTML = `
+  `;
+    ta.setAttribute('class', 'pu_memo');
+    ta.setAttribute('name', 'pu_memo');
+    ta.setAttribute('readOnly', true);
+    previewMemo.appendChild(ta);
+  } else {
+    const ta = document.createElement('textarea');
+    ta.innerHTML = `${pu_memo}
+  `;
+    ta.setAttribute('class', 'pu_memo');
+    ta.setAttribute('name', 'pu_memo');
+    ta.setAttribute('readOnly', true);
+    previewMemo.appendChild(ta);
+  }
+
+  // 첨부 이미지 preview
+  const imgView = JSON.parse(`[[${pickupImg}]]`);
+  const previewImg = document.querySelector('#img_pickup_preview');
+  function createElement() {
+    imgView.forEach(pickupImg => {
+      const li = document.createElement('li');
+      const img = document.createElement('img');
+
+      img.setAttribute('src', `${pickupImg.pu_img_path}`);
+      img.setAttribute('data-file', `${pickupImg.pu_img_origin_name}`);
+      img.setAttribute('style', 'margin-left: 10px;');
+      li.appendChild(img);
+      li.id = "img_list";
+      previewImg.appendChild(li);
+    });
+  }
+  createElement();
+</script>
+</html>

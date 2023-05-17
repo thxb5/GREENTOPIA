@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout2.html}">
+<link href="/css/board.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title> 수거업체 페이지 </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+<div layout:fragment="admin_content">
+    <div class="container" id="box" style="margin-top: 120px; text-align: center">
+        <form action="/update_service" method="post">
+            <h2>예약자 상세정보</h2>
+            <div align="center">
+                <div class="container" style="text-align: center; width: 600px"   >
+                    <table class="table table-success" >
+                        <tr>
+                            <td>번호</td>
+                            <td>
+
+                                <input type="text" class="form-control" name="pu_no" id="pu_no" th:value="${pick.pu_no}" readonly >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> 아이디 </td>
+                            <td>
+
+                                <input type="text" class="form-control" name="user_id" id="user_id"   th:value="${pick.user_id}" readonly >
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                이름
+                            </td>
+                            <td>
+
+                                <input type="text" class="form-control" name="pu_address_name" id="pu_address_name"   th:value="${pick.pu_address_name}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>전화번호</td>
+                            <td>
+
+                                <input type="text" class="form-control" name="pu_address_tel" id="pu_address_tel"  th:value="${pick.pu_address_tel}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>우편번호</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_address_zip" id="pu_address_zip" th:value="${pick.pu_address_zip}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>도로명</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_address1" id="pu_address1"  th:value="${pick.pu_address1}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>지번</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_address2" id="pu_address2"  th:value="${pick.pu_address2}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>상세주소</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_address3" id="pu_address3"  th:value="${pick.pu_address3}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>예약요청날짜</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_day" id="pu_day"  th:value="${pick.pu_day}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>접수당일날짜</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_date" id="pu_date"   th:value="${pick.pu_date}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>접수요청메모</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_memo" id="pu_memo" th:value="${pick.pu_memo}" readonly >
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>엘레베이터 여부</td>
+                            <td>
+                                <input type="text" class="form-control" name="pu_elevator" id="pu_elevator" th:value="${pick.pu_elevator}" readonly >
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>폐기물 사진</td>
+                            <td>
+                                <img th:src="@{/img/pickupUpload/__${pick.pu_img_save_name}__}">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>예약 상태</td>
+                            <td>
+                                <select class="form-control" name="pu_status" id="pu_status" style="background-color: white;">
+                                    <option value="수거중">수거중</option>
+                                    <option value="수거완료">수거완료</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>메일</td>
+                            <td th:utext="${mail.user_email}"></td>
+                        </tr>
+                        <tr>
+                            <td>메일내용</td>
+                            <td>
+                                <textarea style="width: 100%; height: 170px;">안녕하세요. 그린토피아입니다. 회원님께서 예약하신 [[${pick.pu_day}]]일에 맞춰 저희 업체에서 찾아갈 예정입니다. 예약 전날 회원님에게 다시 한번 연락을 드릴 예정이며, 혹시라도 문의 사항이 있을 경우다시 한번 연락 주시기 바랍니다. 감사합니다.
+                                </textarea>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                    <input type="submit" class="btn btn-success" value="전달" />
+                    <button type="button" class="btn btn-success" onclick="alert('취소 되었습니다'); history.back();" id="modify3">취소</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.products {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -2px;
+}
+
+#button1 {
+    background: #ed2024;
+    width: 160px;
+    height: 45px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: "NanumBarunGothic", sans-serif;
+}
+
+#button2 {
+    margin-left: 2%;
+    background: #e6e6e6;
+    border: 1px solid #888;
+    width: 160px;
+    height: 45px;
+    font-weight: 600;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: "NanumBarunGothic", sans-serif;
+}
+
+#button3 {
+    background: #2f8032;
+    width: 130px;
+    height: 35px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: "NanumBarunGothic", sans-serif;
+}
+
+#button4 {
+    margin-left: 2%;
+    background: #e6e6e6;
+    border: 1px solid #888;
+    width: 130px;
+    height: 35px;
+    font-weight: 600;
+    border-radius: 7px;
+    font-size: 15px;
+    color: black;
+    font-family: "NanumBarunGothic", sans-serif;
+}
+
+#table1 {
+    width: 100%;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -1px;
+    font-family: "NanumBarunGothic", sans-serif;
+}
+
+#table1 > thead {
+    border-top: 2px solid forestgreen;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+#table > thead > tr {
+    height: 35px;
+}
+
+#table1 > tbody > tr {
+    border-bottom: 1px solid #e6e6e6;
+    height: 35px;
+}
+
+.kop {
+    position: relative;
+}
+
+#kop2 {
+    position: absolute;
+    left: 85px;
+    top: 235px;
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}"
+      layout:fragment="content">
+
+<link rel="stylesheet" href="/css/pickUp.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_orange.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<body>
+  <div class="container-fluid" style="padding: 0;">
+    <!--    전체 컨테이너   -->
+    <div class="container_content_all">
+      <!--   상단 배너 이미지   -->
+      <div>
+        <img class="img_header" src="/img/pickup/pickup_recycle.png" alt="픽업 상단 이미지">
+        <div class="textDiv_header">
+          <div class="text_header">배출 신청</div>
+        </div>
+      </div>
+      <!--   페이지별 단계   -->
+      <div class="container" style="margin-top: 55px;">
+        <div class="row box_step">
+          <div class="col-3" style="margin-right: 2%;"></div>
+          <div class="col-2">
+            <div class="circle_currentStep" id="line_stepConnect"><i class="fa-regular fa-pen-to-square"></i></div>
+            <div class="text_step">1단계<br><div style="font-family: NanumBarunGothic, serif;">기본정보 입력</div></div>
+          </div>
+          <div class="col-2">
+            <div class="circle_nextStep" id="line_stepConnect2"><i class="fa-solid fa-recycle"></i></div>
+            <div class="text_step">2단계<br><div style="font-family: NanumBarunGothic, serif;">배출품목 입력</div></div>
+          </div>
+          <div class="col-2">
+            <div class="circle_nextStep"><i class="fa-solid fa-check"></i></div>
+            <div class="text_step">3단계<br><div style="font-family: NanumBarunGothic, serif;">예약 확인</div></div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+      <!--   메인 컨텐츠  -->
+      <div class="container_content">
+        <!--   개인정보 동의   -->
+        <div class="container" style="margin-bottom: 10px;">
+          <div class="box_checkBox">
+            <div style="display:flex; align-items: center; margin-right: 10px;">
+              <input id="checkBox_colPersonInfo" type="checkbox" name="permission_check"/>
+            </div>
+            <div id="text_checkBox">개인정보 제공 동의</div>
+            <div id="text_checkBox2">(필수)</div>
+          </div>
+        </div>
+        <!--   개인정보 동의 약관 내용  -->
+        <div class="container">
+          <div id="text_permission">
+            <div style="width: 92%; margin-left: 3%; font-family: NanumBarunGothic, serif;">
+              개인정보 수집 이용 등에 대한 사전 동의 개인정보보호를 위한 이용자 동의사항(자세한 내용은 “개인정보취급방침”을 확인하시기 바랍니다.)<br><br>
+              <div class="titleNum_permission">가. 개인정보의 수집·이용 목적</div>
+              ① 홈페이지 회원 가입 및 관리 회원 가입의사 확인<br>
+              ② 회원제 서비스 제공에 따른 본인 식별/인증<br>
+              ③ 회원자격 유지/관리<br>
+              ④ 제한적 본인 확인제 시행에 따른 본인확인<br>
+              ⑤ 서비스 부정이용 방지, 맞춤서비스 제공<br>
+              ⑥ 만 14세 미만 아동의 개인정보 처리시 법정대리인의 동의여부 확인<br>
+              ⑦ 각종 고지/통지, 고충처리, 계약서/청구서 발송<br>
+              ⑧ 재화 또는 서비스 제공 물품배송, 요금결제/정산<br>
+              ⑨ 서비스 제공, 콘텐츠 제공, 본인인증, 연령인증, 채권추심<br><br>
+              <div class="titleNum_permission">나. 개인정보의 처리</div>
+              ① 고충처리 민원인의 신원 확인<br>
+              ② 민원사항 확인, 사실조사를 위한 연락/통지<br>
+              ③ 처리결과 통보<br><br>
+              <div class="titleNum_permission">다. 수집하는 개인정보의 항목</div>
+              ① 서비스 제공/필수항목 : 성명, 연락처, 주소<br>
+              ② 선택항목 : 배출품목, 수량<br>
+              ※ 인터넷 서비스 이용과정에서 IP주소, 쿠키, MAC주소, 서비스 이용기록, 방문기록, 불량 이 용기록 등 개인정보 항목이 자동으로 생성되어 수집될 수 있습니다.<br><br>
+              <div class="titleNum_permission">라. 개인정보의 보유 및 이용기간</div>
+              ① 홈페이지 회원 가입 및 관리 : 이용자 홈페이지 탈퇴시까지<br>
+              ② 다만, 다음의 사유에 해당하는 경우에는 해당 사유 종료시까지<br>
+              관계 법령 위반에 따른 수사/조사 등이 진행중인 경우에는 해당 수사/조사 종료시까지<br>
+              홈페이지 이용에 따른 채권/채무관계 잔존시에는 해당 채권/채무관계 정산시까지<br>
+              ③ 서비스 제공 : 재화/서비스 공급완료 및 요금결제/정산 완료시까지<br>
+              ④ 다만, 다음의 사유에 해당하는 경우에는 해당 기간 종료시까지<br>
+              「전자상거래 등에서의 소비자 보호에 관한 법률」에 따른 표시/광고, 계약내용 및 이행 등 거래에 관한 기록 - 표시/광고에 관한 기록 : 6월 - 계약 또는 청약철회, 대금결제, 재화 등의 공급기록 : 5년 - 소비자 불만 또는 분쟁처리에 관한 기록 : 3년<br>
+              「통신비밀보호법」제41조에 따른 통신사실 확인자료 보관 - 가입자 전기통신일시, 개시/종료시간, 상대방 가입자번호, 사용도수, 발신기지국 위치추적자료 : 1년 - 컴퓨터통신, 인터넷 로그기록자료, 접속지 추적자료 : 3개월<br><br>          <div class="permission_text_num">마. 개인정보의 파기</div>
+              ① E-순환거버넌스는 개인정보 보유기간의 경과, 처리목적 달성 등 개인정 보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.<br>
+              ② 정보주체로부터 동의받은 개인정보 보유기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.
+            </div>
+          </div>
+        </div>
+        <!--   약관과 본문 경계선  -->
+        <div class="container">
+          <div class="line_boundary"></div>
+        </div>
+        <!--   개인정보 입력칸  -->
+        <div class="container">
+          <!--   개인정보 입력 title -->
+          <div id="box_contentTitle">
+            <div style="margin-left: 2%">
+              <div id="text_contentTitle">고객정보 입력</div>
+            </div>
+            <div id="box_radio">
+              <input type="radio" name="pickup_info" value="기존 고객정보" checked="checked" style="margin-right: 10px;" /> 기존 고객정보
+              <input type="radio" name="pickup_info" value="새로운 정보 입력" style="margin-right: 10px; margin-left: 20px;" /> 새로운 정보 입력
+            </div>
+          </div>
+          <!--   개인정보 입력 본문  -->
+          <div class="row" style="color: black; width: 92%; margin-left: 5%;">
+            <!--   기존 유저정보  -->
+            <table style="width: 100%;">
+              <!--   접수자명  -->
+              <tr>
+                <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px; padding: 28px;">
+                  <span class="text_contentHeader">접수자명</span>
+                  <span class="text_requiredInput">*</span>
+                </td>
+                <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                  <input type="text" id="pickup_userID" name="user_id" th:value="${session.user.user_id}" style="display: none">
+                  <input type="text" id="pickup_name" name="pickup_name" placeholder="이름 입력" th:value="${session.user.user_name}" style="width: 300px; height: 40px; margin-left: 20px; font-size: 20px;">
+                </td>
+              </tr>
+              <!--   전화번호  -->
+              <tr>
+                <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px; padding: 28px;">
+                  <span class="text_contentHeader">전화번호</span>
+                  <span class="text_requiredInput">*</span>
+                </td>
+                <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                  <input type="text" id="pickup_tel" name="pickup_tel" placeholder="전화번호 입력(- 제외)" th:value="${session.user.user_tel}" style="width: 300px; height: 40px; margin-left: 20px; font-size: 20px;">
+                </td>
+              </tr>
+              <!--   배출 주소  -->
+              <tr>
+                <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                  <span class="text_contentHeader">배출 주소</span>
+                  <span class="text_requiredInput">*</span>
+                </td>
+                <td class="col-10 box_address" style="border: 1px solid #c1baba; padding: 30px; font-family: NanumBarunGothic, serif; font-size: 16px;">
+                  <input type="text" id="pickup_zip_code" name="pickup_zip" placeholder="우편번호" th:value="${session.user.zip_code}"><br>
+                  <input type="text" id="pickup_address1" name="pickup_address1" placeholder="도로명주소" th:value="${session.user.address1}">
+                  <input type="text" id="pickup_address2" name="pickup_address2" placeholder="지번주소" th:value="${session.user.address2}"><br>
+                  <span style="color:#999;display:none"></span>
+                  <input type="text" id="pickup_address3" name="pickup_address3" placeholder="상세주소" th:value="${session.user.address3}">
+                  <input type="text" id="pickup_address4" name="pickup_address4" placeholder="참고항목" th:value="${session.user.address4}">
+                </td>
+              </tr>
+
+
+              <!--   주거 구분  -->
+              <tr style="height: 100px;">
+                <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                  <span class="text_contentHeader">주거 구분</span>
+                  <span class="text_requiredInput">*</span>
+                </td>
+                <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                  <div style="display:flex; margin-left: 20px; font-size: 18px;">
+                    <div>주거형태</div>
+                    <select id="pickup_house" name="pickup_house" style="margin-left: 10px; margin-right: 20px;">
+                      <option value>주거형태</option>
+                      <option value="1">단층주택</option>
+                      <option value="2">연립주택</option>
+                      <option value="3">아파트</option>
+                      <option value="4">빌딩</option>
+                    </select>
+                    <div>엘레베이터 유무</div>
+                    <select id="pickup_elevator" name="pickup_elevator" style="margin-left: 10px; margin-right: 20px;">
+                      <option value>유무 선택</option>
+                      <option value="Y">있음</option>
+                      <option value="N">없음</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <!--   배출 희망일  -->
+              <tr style="font-size: 20px;">
+                <td class="col-2" style="border: 1px solid #c1baba; text-align: center; padding: 20px;">
+                  <span class="text_contentHeader">배출<br>희망일</span>
+                  <span class="text_requiredInput">*</span>
+                </td>
+                <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                  <div style="display:flex; margin-left: 20px;">
+                          <span style="margin-right: 7px;">지정일:
+                            <input type="text" id="myDateInput" name="pickup_day">
+                          </span>
+                    <span id="text_insertDayOfWeek">(-)</span>
+                    <span id="text_dayOfWeek">요일</span>
+                  </div>
+                </td>
+              </tr>
+              <!--   참고 사진  -->
+              <tr>
+                <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                  <div class="text_contentHeader">참고 사진</div>
+                </td>
+                <td class="col-10" style="border: 1px solid #c1baba; padding: 10px; font-family: NanumBarunGothic, serif;">
+                  <input name="pickup_img" type="file" class="img_pickup_upload" accept="image/*" required multiple />
+                  <div style="height: 163px;">
+                    <ul id="img_pickup_preview"></ul>
+                  </div>
+                </td>
+              </tr>
+              <!--   메모  -->
+              <tr>
+                <td class="col-2" style="border: 1px solid #c1baba; text-align: center; font-size: 20px;">
+                  <div class="text_contentHeader">메모</div>
+                </td>
+                <td class="col-10" style="border: 1px solid #c1baba; padding: 30px; font-family: NanumBarunGothic, serif;">
+                  <div style="display:flex;">
+                    <textarea class="pu_memo" name="pickup_memo"></textarea>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!--   페이지 이동  -->
+        <div class="container">
+          <div class="box_pageMove">
+            <input type="button" class="btn btn-outline-success" value="다음" onclick="return chBox()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/pickUp.js"></script>
+<script th:inline="javascript">
+  const userInfoRadio = document.querySelector('input[value="기존 고객정보"]'); // select the "기존 고객정보" radio button
+  const newInfoRadio = document.querySelector('input[value="새로운 정보 입력"]'); // select the "새로운 정보 입력" radio button
+
+  const nameInput = document.getElementById('pickup_name');
+  const pickup_tel = document.getElementById('pickup_tel');
+  const pickup_zip_code = document.getElementById('pickup_zip_code');
+  const pickup_address1 = document.getElementById('pickup_address1');
+  const pickup_address2 = document.getElementById('pickup_address2');
+  const pickup_address3 = document.getElementById('pickup_address3');
+  const pickup_address4 = document.getElementById('pickup_address4');
+
+  var user = [[${user}]];
+  console.log(user); // user 객체 확인
+
+  userInfoRadio.addEventListener('change', () => {
+    if (userInfoRadio.checked) {
+      nameInput.value = user.user_name;
+      pickup_tel.value = user.user_tel;
+      pickup_zip_code.value = user.zip_code;
+      pickup_address1.value = user.address1;
+      pickup_address2.value = user.address2;
+      pickup_address3.value = user.address3;
+      pickup_address4.value = user.address4;
+    }
+  });
+
+  newInfoRadio.addEventListener('change', () => {
+    if (newInfoRadio.checked) {
+      nameInput.value = '';
+      pickup_tel.value = '';
+      pickup_zip_code.value = '';
+      pickup_address1.value = '';
+      pickup_address2.value = '';
+      pickup_address3.value = '';
+      pickup_address4.value = '';
+    }
+  });
+
+</script>
+</html>

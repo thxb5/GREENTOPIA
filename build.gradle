@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.7.6'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.sunny'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf:thymeleaf-spring5'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.0'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    //websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+/*    implementation 'org.webjars:sockjs-client:1.6.1'
+    implementation 'org.webjars:stomp-websocket:2.7.3'*/
+
+    // lombok
+    implementation 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // annotations
+    implementation 'org.jetbrains:annotations:22.0.0'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

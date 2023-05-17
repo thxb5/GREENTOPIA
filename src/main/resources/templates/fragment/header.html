@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<meta charset="UTF-8">
+
+<!-- fontawesome -->
+<link rel="stylesheet" href="/assets/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!-- bootstrap -->
+<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+<!-- owl carousel -->
+<link rel="stylesheet" href="/assets/css/owl.carousel.css">
+<!-- animate css -->
+<link rel="stylesheet" href="/assets/css/animate.css">
+<!-- mean menu css -->
+<link rel="stylesheet" href="/assets/css/meanmenu.min.css">
+<!-- main style -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- responsive -->
+<link rel="stylesheet" href="/assets/css/responsive.css">
+
+<header th:fragment="headerFragment" id="header" class="main_header">
+    <!-- 로그인 안했을 경우 -->
+    <div th:if="${session.user} == null" class="top-header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="/">
+                                <img src="/assets/img/그린토피아.png" alt="로고">
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="/index" class="menu-item">홈</a></li>
+                                <li><a href="/info" class="menu-item">소개</a></li>
+                                <li><a href="/business" class="menu-item">수거업체</a>
+                                </li>
+                                <li><a href="/pickup" class="menu-item">수거예약 </a></li>
+                                <li><a href="/exchange" class="menu-item">포인트교환</a>
+                                </li>
+                                <li><a href="/notice" class="menu-item">공지사항</a>
+                                </li>
+                                <li><a href="/board" class="menu-item">Q&A</a></li>
+                                <li>
+                                    <div class="header-icons">
+                                        <a class="user" href="/login"><i class="fa-solid fa-user fa-lg"></i></a>
+                                        <a class="mobile-hide search-bar-icon" href="/logout"><i
+                                                class="fa-solid fa-right-to-bracket fa-lg"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                        <a class="mobile-show search-bar-icon" href="/login"><i
+                                class="fa-solid fa-right-to-bracket fa-lg"></i></a>
+                        <div class="mobile-menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- menu end -->
+
+    <!-- 로그인 했을 경우 -->
+    <div th:if="${session.user} != null" class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="/">
+                                <img src="/assets/img/그린토피아.png" alt="로고">
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="/index" class="menu-item">홈</a></li>
+                                <li><a href="/info" class="menu-item">소개</a></li>
+                                <li><a href="/pickup" class="menu-item">수거 예약 </a></li>
+                                <li><a href="/exchange" class="menu-item">포인트 교환</a>
+                                </li>
+                                <li><a href="/notice" class="menu-item">공지사항</a>
+                                </li>
+                                <li><a href="/board" class="menu-item">Q&A</a></li>
+                                <li>
+                                <li><a style="width: 100%; border-radius:50px; background: orange;">[[${session.user.user_name}]]님
+                                    환영합니다</a></li>
+                                <li>
+                                    <div class="header-icons">
+                                        <a class="user" href="/myPage"><i class="fa-solid fa-user fa-lg"></i></a>
+                                        <a class="mobile-hide search-bar-icon" href="/logout"><i
+                                                class="fa-solid fa-right-to-bracket fa-lg"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                        <a class="mobile-show search-bar-icon" href="/login"><i
+                                class="fa-solid fa-right-to-bracket fa-lg"></i></a>
+                        <div class="mobile-menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+</html>

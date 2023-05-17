@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 교환 성공 </title>
+    <link rel="stylesheet" href="/css/exchange/exchange3.css" type="text/css">
+</head>
+<body>
+<div layout:fragment="content" th:object="${ev}">
+
+
+    <div class="container-fluid" id="box"
+         style="margin-top: 113px; padding-left: 0px; padding-right: 0px; font-family: 'NanumBarunGothic', sans-serif;">
+
+        <div class="container" style="padding-top: 25px;">
+
+            <div class="text1">
+                <p>교환 결제 완료</p>
+            </div>
+
+            <div style="border-top: 2px solid dodgerblue; border-bottom: 1px solid #e6e6e6; margin-bottom: 3%;">
+                <div class="container rol" style="margin-top: 2%; margin-bottom: 2%;">
+                    <p style="margin-bottom: 0px;">교환이 성공적으로 <span style="color: dodgerblue;">완료</span>되었습니다</p>
+                    <p style="font-size: 16px; color: #888; letter-spacing: -2px;">주문번호 : [[${ev.ex_num}]]</p>
+                    <div>
+                        <button id="mysuccess1"><a href="/myPage" style="color: dodgerblue;">마이페이지</a></button>
+                        <button id="mysuccess2"><a href="/board" style="color:#888;">QNA게시판</a></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boxes">
+                <div class="text1" style="margin-top: 2%;">
+                    <p>결제 내역</p>
+                </div>
+                <table id="table2">
+                    <thead>
+                    <tr style="border-top: 2px solid black;">
+                        <td>상품구분</td>
+                        <td>상품명</td>
+                        <td>수량</td>
+                        <td>포인트</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="padding:0;">모바일 상품권</td>
+                        <td style="padding: 0;">[[${ev.pro_name}]]</td>
+                        <td style="padding: 0;">1</td>
+                        <td style="padding: 0; color: red;">[[${ev.pay_point}]]p</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top:2%; margin-bottom: 2%;">
+                <table id="table3">
+                    <tbody>
+                    <tr>
+                        <td style="width: 10%; padding-left: 10px; border-right:1px solid #888; background: #e6e6e6;">
+                            회원아이디
+                        </td>
+                        <td style="padding-left: 10px;" th:utext="${ev.user_id}">test1</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; padding-left: 10px; border-right:1px solid #888; background: #e6e6e6;">
+                            회원이름
+                        </td>
+                        <td style="padding-left: 10px;" th:utext="${ev.user_name}">관리자</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; padding-left: 10px; border-right:1px solid #888; background: #e6e6e6;">
+                            교환일자
+                        </td>
+                        <td style="padding-left: 10px;" th:utext="${ev.ex_date}">2023-04-13</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; padding-left: 10px; border-right:1px solid #888; background: #e6e6e6;">
+                            이메일
+                        </td>
+                        <td style="padding-left: 10px;" th:utext="${ev.user_email}">d@c.com</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%; padding-left: 10px; border-right:1px solid #888; background: #e6e6e6;">
+                            발급여부
+                        </td>
+                        <td style="padding-left: 10px;">Y</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- -->
+
+            <div id="greenBox">
+                <form action="" method="post">
+                    <div class="ticket">
+                        <div class="ticketHead">
+                            <div class="row">
+                                <div class="col" id="boarding">
+                                    교환번호 : [[${ev.ex_num}]] ([[${ev.ex_uuid_num}]])
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="ticketContent">
+                            <div class="row">
+                                <div class="col-3 arrive"
+                                     style="margin-top: 5px; padding-right: 0px; border-right: 1px solid black;">
+                                    <img th:src="@{/img/product/__${ev.pro_img_save_name}__}" alt=""
+                                         style="width: 65%;">
+                                </div>
+                                <div class="col-7" style="margin-top: 5px;">
+                                    <table style="width:100%;">
+                                        <tr style="color: gray; letter-spacing:-1px; font-size: 20px;">
+                                            <td>유저 아이디</td>
+                                            <td>교환 물품</td>
+                                            <td>교환 일자</td>
+                                        </tr>
+                                        <tr style="font-weight: 700; font-size: 17px; letter-spacing: -2px;">
+                                            <td th:utext="${ev.user_id}">1</td>
+                                            <td th:utext="${ev.pro_name}">올리브영 1만원권</td>
+                                            <td th:utext="${ev.ex_date}" style="font-size: 13px;">2023-02-24</td>
+                                        <tr style="color: gray; letter-spacing:-1px; font-size: 20px;">
+                                            <td>사용 그린포인트</td>
+                                            <td>잔액 그린포인트</td>
+                                            <td>발급 여부</td>
+                                        </tr>
+                                        <tr style="font-weight: 700; font-size: 17px; letter-spacing: -2px;">
+                                            <td style="color: dodgerblue;" th:utext="${ev.pay_point}">1,600</td>
+                                            <td style="color: dodgerblue;" th:utext="${ev.remain_point}">18,650</td>
+                                            <td style="color: dodgerblue; text-align: center;">Y</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-2">
+                                    <img src="/img/myPage/qr-code.png" id="qr">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+        </div>
+
+
+        <!-- logo carousel -->
+        <div class="logo-carousel-section" style="margin-top: 3%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo-carousel-inner">
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/서울시로고.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/환경부로고.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/시민연대.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/엘지전자.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/삼성전자.png" alt="" style="margin-top: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end logo carousel -->
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}"
+      layout:fragment="content">
+<meta charset="UTF-8">
+<script src="/js/top_btn.js"></script>
+<title> 그린토피아 </title>
+<body>
+<!--PreLoader-->
+<div class="loader">
+    <div class="loader-inner">
+        <div class="circle"></div>
+    </div>
+</div>
+<!--PreLoader Ends-->
+<!-- hero area -->
+<div class="pt-80 hero-area hero-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 offset-lg-2 text-center">
+                <div class="hero-text">
+                    <div class="hero-text-tablecell">
+                        <p class="subtitle">쓰레기 잘 버리고 지구를 지키자!</p>
+                        <h1>폐가전제품 방문수거 서비스</h1>
+                        <div class="hero-btns">
+                            <a href="/pickup" class="boxed-btn">수거 예약하기</a>
+                            <a href="/myPage" class="bordered-btn">예약 조회/변경</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end hero area -->
+
+<!-- features list section -->
+<div class="list-section pt-80 pb-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <div class="list-box d-flex align-items-center">
+                    <div class="list-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="content">
+                        <h3>무상 수거</h3>
+                        <p>언제든 예약한 시간에 픽업</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <div class="list-box d-flex align-items-center">
+                    <div class="list-icon">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
+                    <div class="content">
+                        <h3>02-1234-5678</h3>
+                        <p>9~6 상담가능</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="list-box d-flex justify-content-start align-items-center">
+                    <div class="list-icon">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <div class="content">
+                        <h3>그린포인트</h3>
+                        <p>포인트 받아 상품 교환</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end features list section -->
+
+<!-- product section -->
+<div class="product-section mt-100 mb-100" style="margin-top: 40px; margin-bottom: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3>그린 포인트 <i class="fa-solid fa-leaf"></i></h3>
+                    <p>그린포인트로 교환 가능한 품목을 알아보세요!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="justify-content: center;">
+            <div class="card" style="width: 360px; margin-right: 9px; margin-top: 10px; text-align: center;" th:each="list : ${pv}">
+                <a href="#"><img th:src="@{/img/product/__${list.pro_img_save_name}__}" class="card-img-top" alt="..." style="width: 100%; height:300px;"></a>
+                <div class="card-body">
+                    <h4 class="card-title"><a th:text="${list.pro_name}" style="color: dodgerblue;">스타벅스 1만원권</a></h4>
+                    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 16px; font-weight: 700;">모바일 상품권</h6>
+                    <p style="color: red; font-weight: 700; font-size: 16px; font-family: 'NanumBarunGothic', sans-serif;"
+                       th:text="'그린포인트 : '+${#numbers.formatInteger(list.pro_point, 3, 'COMMA')} + 'p'">
+                        10000p
+                    </p>
+                </div>
+                <div style="border-top: 1px solid #e6e6e6;">
+                    <p style="text-align: left; margin-left: 10px; font-weight: 700; font-size: 16px; font-family: 'NanumBarunGothic', sans-serif;">lnc. 그린토피아</p>
+                </div>
+            </div>
+        </div>
+        <div class="col text-center" style="margin-top: 3%; font-family: 'NanumBarunGothic', sans-serif;"><a href="/exchange" class="cart-btn"><i class="fa-solid fa-shopping-basket"></i>교환하러 가기</a>
+        </div>
+    </div>
+</div>
+<!-- end product section -->
+
+<!-- cart banner section -->
+<section class="service pt-100 pb-100" id="service_box" style="padding-top: 40px; padding-bottom: 40px;">
+    <div class="container text-center p-5 bg-light rounded-3">
+        <h1 class="main_title">수거 과정</h1>
+        <div class="row py-4">
+            <div class="col-sm"><h3>01</h3> <br>
+                <img class="h3-img" src="/assets/img/join.png"
+                                                      style="width: 70px;" alt="가입 이미지"> <br>
+                <h4 class="h4-line2">회원가입<br>로그인</h4>
+
+            </div>
+            <div class="col-sm"><h3>02</h3> <br> <img class="h3-img" src="/assets/img/rsv.png"
+                                                      style="width: 80px;" alt="예약 이미지"><br>
+                <h4 class="h4-line">예약하기</h4>
+            </div>
+            <div class="col-sm"><h3>03</h3> <br> <img class="h3-img" src="/assets/img/pickup.png"
+                                                      style="width: 80px;" alt="수령 이미지"><br>
+                <h4 class="h4-line">방문수령</h4>
+            </div>
+            <div class="col-sm"><h3>04</h3> <br> <img class="h3-img" src="/assets/img/greenPoint.png"
+                                                      style="width: 80px;" alt="적립 이미지"> <br>
+                <h4 class="h4-line2">GreenPoint<br> 지급/적립</h4>
+            </div>
+            <div class="col-sm"><h3>05</h3> <br><img class="h3-img" src="/assets/img/coupon.png"
+                                                     style="width: 80px;" alt="교환 이미지"> <br>
+                <h4 class="h4-line2">E-coupon<br>교환하기 </h4>
+            </div>
+        </div>
+        <div class="main-btn">
+            <a href="/info" class="boxed-btn"><i class="fa-solid fa-magnifying-glass"></i> 자세히 보기</a>
+        </div>
+    </div>
+</section>
+<!-- end cart banner section -->
+
+<!-- testimonail-section -->
+<div class="testimonail-section mt-100 mb-100" style="margin-top: 40px; margin-bottom: 40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center">
+                <div class="testimonial-sliders">
+                    <div class="single-testimonial-slider">
+                        <div class="client-meta">
+                            <h3>이oo<span>은평구</span></h3>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-body">
+                                " 오래 쓴 가전 이사하면서 버리기도 아깝고 처치곤란이었는데 <br>
+                                예약만 하면 무료로 수거해줘서 수수료 부담도 없고 좋네요. "
+                            </p>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-testimonial-slider">
+                        <div class="client-meta">
+                            <h3>김oo <span>마포구</span></h3>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-body">
+                                " 1인 가구라 혼자 무거운 폐가전 옮기기 어려웠는데 <br>
+                                무상으로 수거해주는 시스템이 있다니 알게 되어 다행이에요!"
+                            </p>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-testimonial-slider">
+                        <div class="client-meta">
+                            <h3>전oo <span>강동구</span></h3>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-body">
+                                " 사설 업체는 제대로 버려질까 걱정이 되었는데, <br>
+                                올바른 분리수거와 부품 재활용이 된다니 한결 마음이 가볍네요. "
+                            </p>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end testimonail-section -->
+
+<!-- shop banner -->
+<section class="shop-banner">
+    <div class="container" style="width: 100%; height: 100%; text-align: center;">
+        <a href="/notice" style="margin-top: 45%;" class="cart-btn btn-lg" id="find_btn"><i class="fa-solid fa-magnifying-glass"></i> 자세히 보기</a>
+    </div>
+</section>
+<!-- end shop banner -->
+
+<!-- latest news -->
+<div class="latest-news pt-80 pb-100" style="padding-top: 40px; padding-bottom: 40px;">
+    <div class="container">
+        <section class="notice_area">
+            <div class="wrap" id="notice_box">
+                <div class="notice_head">
+                    <h2 class="main_title">공지사항</h2>
+                </div>
+                <ul class="notice_list" th:each="main : ${nv}">
+                    <li>
+
+                        <a th:href="@{noticeDetail(notice_num=${main.notice_num})}" th:utext="${main.notice_title}">공지1</a>
+
+                        <span class="date" th:utext="${#temporals.format(main.notice_date, 'yyyy-MM-dd')}"></span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- end latest news -->
+
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="logo-carousel-inner">
+                    <div class="single-logo-item">
+                        <img src="/assets/img/company-logos/서울시로고.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="/assets/img/company-logos/환경부로고.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="/assets/img/company-logos/시민연대.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="/assets/img/company-logos/엘지전자.png" alt="">
+                    </div>
+                    <div class="single-logo-item">
+                        <img src="/assets/img/company-logos/삼성전자.png" alt="" style="margin-top: 8px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end logo carousel -->
+</body>
+</html>

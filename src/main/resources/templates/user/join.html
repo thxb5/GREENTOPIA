@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title> 회원가입 </title>
+    <link rel="stylesheet" type="text/css" href="/css/join.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/join.js"></script>
+</head>
+<body>
+<div layout:fragment="content" style="padding-bottom: 50px;">
+    <div class="container" id="box" style="margin-top: 140px; font-family: GmarketSansMedium,serif;">
+        <div class="row">
+
+            <div class="col-md-6" id="box1">
+                <div class="col" style="height:50%; margin-top: 2px;
+                display: flex; flex-direction: column; justify-content: center;">
+                    <p id="p1">그린토피아의 진심에 공감해주신</p>
+                    <p id="p2">님을 환영합니다!</p>
+                    <div>
+                        <p id="p3"> 그린토피아의 </p>
+                        <p id="p4"> 신규회원으로 시작해보십시오 </p>
+                    </div>
+
+                </div>
+                <div class="col" id="collapse">
+                    <img src="/img/green-icon2.png" style="width:30%;">
+                    <div class="row" style="margin-top: -15%; height: 80px;">
+                    </div>
+                    <div>
+                        <button id="button1">
+                            <a href="/index"
+                               style="color:white; font-size: 26px; color: white; letter-spacing: -2px; font-weight: 700;">그린토피아
+                                기능 둘러보기</a></button>
+                    </div>
+                    <div>
+                        <button id="button2">
+                            <a href="/login"
+                               style="color: rgba(26, 121, 64, 0.8); font-size:26px; letter-spacing: -2px; font-weight: 700;">
+                                로그인</a></button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6" id="box2">
+                <form action="/join" method="post" style="text-align: left; margin-left: 30px;">
+                    <div class="col" style="margin-top: 5%; color: black;">
+                        <p style="font-size: 32px; font-weight: 700; letter-spacing: -2px; color: #0F4229;">회원가입</p>
+                    </div>
+
+                    <div>
+                        <img src="/img/join/user.png" style="width: 20px;">
+                        <input type="text" name="user_id" placeholder="아이디를 입력해주세요" class="put" style="width:45%"
+                               id="userId">
+                        <button type="button" onclick="checkDuplicateId()" style="border: 1px solid #767676;">중복 검사
+                        </button>
+                        <span id="idCheckMessage" style="color:red; font-weight: 700; letter-spacing: -2px;"></span>
+                    </div>
+
+                    <div>
+                        <img src="/img/join/password.png" style="width: 20px;">
+                        <input type="password" name="user_pass" placeholder="비밀번호를 입력해주세요" class="put"
+                               style="width:91%; margin-top: 10px;">
+                    </div>
+
+                    <div>
+                        <img src="/img/join/user.png" style="width: 20px;">
+                        <input type="text" name="user_name" placeholder="이름을 입력해주세요" class="put"
+                               style="width: 91%; margin-top: 10px;">
+                    </div>
+
+                    <div>
+                        <img src="/img/join/email.png" style="width: 20px;">
+                        <input type="email" name="user_email" placeholder="이메일을 입력해주세요" class="put"
+                               style="width:91%; margin-top: 10px;">
+                    </div>
+
+                    <div>
+                        <img src="/img/join/phone.png" style="width: 20px;">
+                        <input type="text" name="user_tel" placeholder="휴대폰 번호를 입력해주세요" class="put"
+                               style="width:91%; margin-top: 10px;">
+                    </div>
+
+                    <div>
+                        <img src="/img/join/address.png" style="width: 20px;">
+                        <input type="text" name="zip_code" id="sample4_postcode" placeholder="우편번호" class="put"
+                               style="width:45%; margin-top: 10px;">
+                        <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="button3"><br>
+                        <input type="text" name="address1" id="sample4_roadAddress" placeholder="도로명주소"
+                               style="margin-left:26px; width:45%; margin-top: 10px;" class="put">
+                        <input type="text" name="address2" id="sample4_jibunAddress" placeholder="지번주소" class="put"
+                               style="width:45%"><br>
+                        <span id="guide" style="color:#999;display:none"></span>
+                        <input type="text" name="address3" id="sample4_detailAddress" placeholder="상세주소" class="put"
+                               style="margin-left:26px; width:45%; margin-top: 10px;">
+                        <input type="text" name="address4" id="sample4_extraAddress" placeholder="참고항목" class="put"
+                               style="width: 45%;"><br>
+
+                    </div>
+
+
+                    <div style="margin-top: 15%; text-align: center;">
+                        <input type="submit" value="회원가입" id="join2">
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

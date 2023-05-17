@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout2.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title> 관리자페이지 </title>
+    <script src="/js/ckeditor/ckeditor.js"></script>
+    <script src="/js/admin_product3.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            CKEDITOR.replace('editor');
+        });
+    </script>
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+    <div class="container"
+         style="margin-top: 5%; margin-left: 5%; box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72); font-family: 'NanumBarunGothic', sans-serif;">
+        <p style="font-weight: 700; font-size: 35px; margin-top: 15px; text-align: center;">수정 하기</p>
+        <form action="/updatePro" method="post" style="margin-left: 5%; padding-top: 3%; padding-bottom: 4%;">
+            <table style="width: 90%;" th:object="${pro}">
+                <tbody>
+                <input type="hidden" th:value="${pro.pro_num}" name="pro_num">
+                <tr>
+                    <td style="font-weight: 700;">상품 이름</td>
+                    <td><input type="text" th:value="${pro.pro_name}" name="pro_name" style="width: 100%;"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">상품 내용</td>
+                    <td><textarea id="editor" th:value="${pro.pro_content}" th:utext="${pro.pro_content}"
+                                  name="pro_content"></textarea></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">지불포인트</td>
+                    <td><input type="number" th:value="${pro.pro_point}" name="pro_point" style="width: 30%;"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">지급처</td>
+                    <td><input tpye="text" th:value="${pro.pro_from}" name="pro_from" style="width: 30%;"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center;">
+                <input type="submit" value="등록" id="productEnroll"
+                       style="width: 150px; height: 40px; color: white; background: #2a722d; font-size: 20px; font-weight: 700; border: none;">
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

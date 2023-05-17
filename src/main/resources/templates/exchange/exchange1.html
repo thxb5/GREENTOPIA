@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 교환 </title>
+    <link rel="stylesheet" href="/css/exchange/exchange1.css" type="text/css">
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <div class="container-fluid" id="box" style="margin-top: 113px; padding-left: 0px; padding-right: 0px; font-family: 'NanumBarunGothic', sans-serif;">
+
+        <div class="container">
+
+            <div class="explain" style="padding-top: 4%;">
+                <p style="font-size: 35px; margin-bottom: 0px; font-family: 'GmarketSansMedium', sans-serif;">포인트 사용방법</p>
+                <p style="color: #666; font-weight: 700;">그린포인트로 제공하는 상품들과 교환하여 이용할 수 있습니다</p>
+
+            </div>
+
+            <div>
+                <img src="/img/exchange/교환포인트.png" stlye="width:100%;">
+
+            </div>
+
+
+
+                <div class="explain" style="margin-top: 4%;">
+                    <p style="font-size: 35px; margin-bottom: 0px; font-family: 'GmarketSansMedium', sans-serif;">교환 상품</p>
+                </div>
+
+            <div class="product1">
+                <div class="container">
+                    <div class="row" style="text-align: center; justify-content: center;">
+
+                        <div class="card" style="width: 360px; margin-right: 9px; margin-top: 10px;" th:each="list : ${pv}">
+                            <a href="#"><img th:src="@{/img/product/${list.pro_img_save_name}}" class="card-img-top" alt="..." style="width: 100%; height:300px;"></a>
+                            <div class="card-body">
+                                <h4 class="card-title"><a th:href="@{exchange2(pro_num=${list.pro_num})}" th:text="${list.pro_name}">스타벅스 1만원권</a></h4>
+                                <h6 class="card-subtitle mb-2 text-muted">모바일 상품권</h6>
+                                <p class="card-text" style="font-weight: 700;">기간 : 무제한</p>
+                                <p style="color: red; font-weight: 700;"
+                                th:text="'그린포인트 : '+${#numbers.formatInteger(list.pro_point, 3, 'COMMA')} + 'p'">
+                                    10000p
+                                </p>
+                            </div>
+                            <div style="border-top: 1px solid #e6e6e6;">
+                                <p style="text-align: left; margin-left: 10px; font-weight: 700;">lnc. 그린토피아</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="margin-top: 4%;">
+
+                <table>
+                    <thead>
+                      <tr>
+                         <td style="width: 20%;">교환상품</td>
+                         <td style="width: 20%;">올리브영</td>
+                         <td style="width: 20%;">GS편의점</td>
+                         <td style="width: 20%;">스타벅스</td>
+                         <td style="width: 20%;">추가 예정</td>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td style="color: black;">포인트</td>
+                          <td>10,000p</td>
+                          <td>10,000p</td>
+                          <td>10,000p</td>
+                          <td>추가 예정</td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid black;">
+                          <td style="color: black;">수령방법</td>
+                          <td colspan="4">모바일 상품권 발송</td>
+                      </tr>
+                    </tbody>
+                </table>
+                <p style="color: gray; font-weight: 700;">※ 상품은 추가와 변동이 있을 수 있습니다</p>
+            </div>
+
+
+        </div>
+
+        <!-- logo carousel -->
+        <div class="logo-carousel-section" style="margin-top: 3%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo-carousel-inner">
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/서울시로고.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/환경부로고.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/시민연대.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/엘지전자.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/삼성전자.png" alt="" style="margin-top: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end logo carousel -->
+
+    </div>
+
+</div>
+</body>
+</html>

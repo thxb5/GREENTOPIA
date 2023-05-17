@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 마이 페이지 </title>
+    <link rel="stylesheet" type="text/css" href="/css/myPage.css">
+    <script src="/js/myPage.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container" id="box1"
+         style="margin-top: 140px; margin-bottom:5%; font-family: 'NanumBarunGothic', sans-serif; font-weight:700;">
+        <div class="row" id="box2" style="height: 850px;">
+
+            <!-- 시작 -->
+            <div class="col-md-3">
+                <div style=" width: 100%; height: 101px; display: flex; justify-content: center; align-items: center;" th:if="${profileImgVo} != null">
+                    <img th:src="@{/img/profile/{img_save_name}(img_save_name=${profileImgVo.img_save_name})}" id="pro_img" style="width: 110px; border-radius: 60%; cursor:pointer;" data-toggle="modal" data-target="#exampleModal"
+                    th:onerror="javascript:this.src='img/유저.png'">
+                    <input type="file" id="profile_img" style="display: none;">
+                </div>
+
+                <div style=" width: 100%; height: 101px; display: flex; flex-direction: column; align-items: center;" th:if="${profileImgVo} == null">
+                    <img src="/img/유저.png" id="pro_img" style="width: 110px; border-radius: 60%; cursor:pointer;" data-toggle="modal" data-target="#exampleModal">
+                    <input type="file" id="profile_img" style="display: none;">
+                </div>
+
+                <div style="font-size: 25px; letter-spacing: -2px; margin-top: 10px;">
+                    <span style="color: black; font-weight: 700;">[[${user.user_id}]]</span>님
+                    <a href="/modify"><img src="/img/right-arrow.png" style="width: 15px;"></a>
+                </div>
+                <div>
+                    <div class="container-fluid" style="margin-bottom: 15px;">
+                        <div id="userProfile" style="height: 10%;">
+                            <span>내 프로필</span>
+                        </div>
+                        <div style="height: 90%; border: 1px solid #e6e6e6;" id="profiles">
+                            <div>
+                                <img src="/img/myPage/user.png" style="width: 10%;">
+                                <span> [[${user.user_id}]]</span>
+                            </div>
+                            <div>
+                                <img src="/img/myPage/id-card.png" style="width: 10%;">
+                                <span> [[${user.user_name}]]</span>
+                            </div>
+                            <div>
+                                <img src="/img/myPage/mail.png" style="width: 10%;">
+                                <span> [[${user.user_email}]]</span>
+                            </div>
+                            <div>
+                                <img src="/img/myPage/phone-call.png" style="width: 10%" ;>
+                                <span>  [[${user.user_tel.substring(0,7)}]]****</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="greenPoint">
+                    <div style="margin-bottom: 10px;">
+                        <img src="/img/greenPoint.png" style="width: 30px; margin-left: 15px;">
+                        <span style="margin-left: 5px; color: black;">그린포인트</span>
+                        <span style="text-align: center; color: #2a722d; font-weight: 700;">[[${user.user_point}]]p</span>
+                        <a href="/greenPoint"><img src="/img/right-arrow.png" style="width: 15px;"></a>
+                    </div>
+                </div>
+
+                <div>
+                    <img src="/assets/img/event.png" style="width: 95%;">
+                </div>
+                <div>
+                    <img src="/img/myPage/배너2.png" style="width: 95%; margin-top: 15px;">
+                </div>
+                <div style="margin-top: 30px;">
+                    <button style="width: 90%; border-radius: 5px; background: white;">
+                        <a href="/logout" style="font-size: 30px; font-weight: 700; color: black;">
+                            로그아웃</a></button>
+                </div>
+                <div style="margin-top: 30px; text-align: end;">
+                    <a id="delete" th:href="@{delete(user_id=${user.user_id})}"
+                       style="color: black; font-size: 13px; letter-spacing: -1px;">회원탈퇴 하기</a>
+                </div>
+            </div>
+
+            <!-- 본문 -->
+            <div class="col-md-9">
+
+                <div>
+                    <p style="text-align: left; font-size: 25px; font-weight: 700; margin-left: 15px; margin-bottom: 7px; color: black;">
+                        나의 예약</p>
+                </div>
+                <div>
+                    <div id="reservation">
+                        <!--네개의 과정-->
+                        <div class="container-fluid"
+                             style="height: 30%; border-bottom: 1px solid #e6e6e6; background: linear-gradient(to right, #05c75d, #40c7cc);">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-md-3" style="display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/myPage/reserve.png" style="width: 27%; margin: 0 auto;">
+                                    <p style=" font-family: 'GmarketSansMedium';">1.예약완료</p>
+                                </div>
+                                <div class="col-md-3" style="display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/myPage/approved.png" style="width: 27%; margin: 0 auto;">
+                                    <p style=" font-family: 'GmarketSansMedium';">2.승인</p>
+                                </div>
+                                <div class="col-md-3" style="display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/myPage/pickup-car.png" style="width: 27%; margin: 0 auto;">
+                                    <p style=" font-family: 'GmarketSansMedium';">3.수거과정</p>
+                                </div>
+                                <div class="col-md-3" style="display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/myPage/finish.png" style="width: 27%; margin: 0 auto;">
+                                    <p style=" font-family: 'GmarketSansMedium';">4.수거완료</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 예약 내용-->
+                        <div style="height: 70%;">
+                            <div class="container">
+                                <span style="float: right; margin-right: 15px; margin-top: 5px;"><a href="/reservationBd"
+                                                                                                    style="color: black; font-size: 14px;">더보기</a></span>
+                                <table id="table2">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:10%;">
+                                            <input type="checkbox" class="checkbox_all"
+                                                   style="margin-top: 7px;">
+                                        </th>
+                                        <th style="width:12%;">예약번호</th>
+                                        <th>예약 날짜</th>
+                                        <th>아이디</th>
+                                        <th>메모</th>
+                                        <th style="width: 20%;">예약상태</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="pickList : ${pdv}">
+                                        <td>
+                                            <input type="checkbox" class="checkbox_item" style="margin-top: 7px;">
+                                        </td>
+                                        <td th:text="${pickList.pu_no}"></td>
+                                        <td th:text="${pickList.pu_day}"></td>
+                                        <td th:text="${pickList.user_id}"></td>
+                                        <td th:text="${pickList.pu_memo}"></td>
+                                        <td th:text="${pickList.pu_status}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div class="container"
+                             style="border: 2px solid #e6e6e6; width: 97%; height: 100%; margin-left: 15px; margin-top: 15px;">
+                            <div class="row" style="height: 100%;">
+                                <div class="col-md-3" style="margin-top: 2%; display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/myPage/user1.png" alt="" style="width:30%; margin: 0 auto;">
+                                    <p><a href="/modify"
+                                          style="color: black; letter-spacing: -2px; font-size: 14px; font-weight: 700;">개인정보
+                                        수정</a></p>
+                                </div>
+                                <div class="col-md-3" style="margin-top: 2%; display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/greenPoint.png" style="width:30%; margin: 0 auto;">
+                                    <p><a href="/greenPoint"
+                                          style="color: black; letter-spacing: -2px; font-size: 14px; font-weight: 700;">그린포인트</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-3" style="margin-top: 2%; display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/myPage/exchange.png" style="width:30%; margin: 0 auto;">
+                                    <p><a th:href="@{breakDown(user_id=${session.user.user_id})}"
+                                          style="color: black; letter-spacing: -2px; font-size: 14px; font-weight: 700;">교환</a>
+                                    </p>
+                                </div>
+                                <div class="col-md-3" style="margin-top: 2%; display: flex; flex-direction: column; justify-content: center;">
+                                    <img src="/img/myPage/reserve1.png" style="width:30%; margin: 0 auto;">
+                                    <p><a href="/reservationBd"
+                                          style="color: black; letter-spacing: -2px; font-size: 14px; font-weight: 700;">예약내역</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style="margin-top: 15px;">
+                        <p style="font-weight: 700; font-size: 25px; color: black; text-align: left; margin-left: 15px;">
+                            나의 활동</p>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col po1" style="border: 1px solid #e6e6e6; height: 300px;">
+                                    <div class="pol2" style="height: 7%; margin-top: 10px; color: black;">
+                                        <span style="margin-left: 10px;">내가 쓴 글</span>
+                                        <span><a href="/myWrite"
+                                                 style="float: right; margin-right: 10px; font-size: 13px; color: black; padding-top: 6px;">더보기</a></span>
+                                    </div>
+                                    <div style="font-size: 13px;">
+                                        <table class="table1">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 13%;">번호</th>
+                                                <th>제목</th>
+                                                <th style="width: 20%;">작성자</th>
+                                                <th style="width: 20%;">작성일</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody th:each="bvlist : ${bv}">
+                                            <tr>
+                                                <td th:text="${bvlist.board_num}"></td>
+                                                <td th:text="${bvlist.board_title}"></td>
+                                                <td th:text="${bvlist.user_id}"></td>
+                                                <td th:text="${#temporals.format(bvlist.board_date, 'yyyy-MM-dd')}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <dic class="col po1"
+                                     style="margin-left: 15px; border: 1px solid #e6e6e6; height: 300px;">
+                                    <div class="pol2" style="height: 7%; margin-top: 10px; color: black;">
+                                        <span style="margin-left: 10px;">내가 쓴 댓글</span>
+                                        <span><a href="/myComment"
+                                                 style="float: right; margin-right: 10px; font-size: 13px; color: black; padding-top: 6px;">더보기</a></span>
+                                    </div>
+                                    <div style="font-size: 13px;">
+                                        <table class="table1">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 13%;">번호</th>
+                                                <th>댓글</th>
+                                                <th style="width: 20%;">작성자</th>
+                                                <th style="width: 20%;">작성일</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="cvList : ${cv}">
+                                                <td th:text="${cvList.com_num}"></td>
+                                                <td th:text="${cvList.com_content}"></td>
+                                                <td th:text="${cvList.user_id}"></td>
+                                                <td th:text="${cvList.com_date}"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </dic>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <form action="/uploadProfile" method="post" enctype="multipart/form-data">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">프로필 사진 변경</h5>
+                        <div style="text-align: right;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="margin: 0 auto;">
+                        <input type="file" id="profile_upload" name="file">
+                        <div class="img_wrap" style="width: 100px; height: 100px; border-radius: 60%; margin: 0 auto;">
+                            <img id="img" style="width: 100%; height: 100%;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit"  class="btn btn-primary" value="등록하기" id="button3">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="button4">
+                            취소
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
+</body>
+</html>

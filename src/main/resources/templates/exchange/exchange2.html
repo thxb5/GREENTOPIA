@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 교환 </title>
+    <link rel="stylesheet" href="/css/exchange/exchange2.css" type="text/css">
+    <script src="/js/exchange2.js"></script>
+</head>
+<body>
+<div layout:fragment="content" th:object="${pro}">
+
+
+    <div class="container-fluid" id="box"
+         style="margin-top: 113px; padding-left: 0px; padding-right: 0px; font-family: 'NanumBarunGothic', sans-serif;">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-5" style="margin-top: 2%;">
+                    <img th:src="@{/img/product/__${pro.pro_img_save_name}__}" alt="" style="width:100%;">
+                </div>
+
+                <div class="col-md-7" style="border-top: 3px solid black; margin-top: 2%;">
+
+                    <div style="border-bottom: 1px solid #e6e6e6; font-family: 'GmarketSansMedium', sans-serif;">
+                        <span th:utext="${pro.pro_from}"></span>
+                        <p class="products" th:utext="${pro.pro_name}"></p>
+                        <span class="products" style="font-size: 26px; font-weight: 1000;"
+                              th:utext="${#numbers.formatInteger(pro.pro_point, 3, 'COMMA')}"></span>
+                        <span style="font-size: 24px;">p</span>
+                    </div>
+
+                    <div style="display: flex; border-bottom: 1px solid #e6e6e6;">
+                        <div style="padding-top: 15px; padding-bottom: 15px; width: 30%;">
+                            <p style="color: #888; font-size: 16px; font-family: 'GmarketSansMedium', sans-serif;">
+                                지불포인트</p>
+                        </div>
+
+                        <div style="padding-top: 15px; padding-bottom: 15px; display: flex;">
+                            <p style="font-size: 16px; font-weight: 600;" th:utext="${#numbers.formatInteger(pro.pro_point, 3, 'COMMA')}"></p>
+                            <p style="font-size: 16px; font-weight: 600;">p</p>
+                        </div>
+                    </div>
+
+
+                    <div style="display: flex; border-bottom: 1px solid #e6e6e6;">
+
+                        <div style="padding-top: 15px; padding-bottom: 15px; width: 30%;">
+                            <p style="color: #888; font-size: 16px; font-family: 'GmarketSansMedium', sans-serif;">
+                                예약발송</p>
+                        </div>
+
+                        <div style="padding-top: 15px; padding-bottom: 15px;">
+                            <p style="font-size: 16px; font-weight: 600;">가능</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; height: 30px;">
+                        <div style="padding-top: 15px; padding-bottom: 15px; width: 30%;">
+                            <p style="color: #888; font-size: 16px; font-family: 'GmarketSansMedium', sans-serif;">
+                                교환처</p>
+                        </div>
+
+                        <div style="padding-top: 15px; padding-bottom: 15px;">
+                            <p style="font-size: 16px; font-weight: 600;" th:utext="${pro.pro_from}"></p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex;">
+                        <div style="padding-top: 15px; padding-bottom: 15px; width: 30%;">
+                            <p style="color: #888; font-size: 16px; font-family: 'GmarketSansMedium', sans-serif;">
+                                유효기간</p>
+                        </div>
+
+                        <div style="padding-top: 15px; padding-bottom: 15px;">
+                            <p style="font-size: 16px; font-weight: 600;">무제한</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2%; text-align: center;">
+                        <button type="button" id="button1" data-toggle="modal" data-target="#exampleModal">포인트 교환
+                        </button>
+                        <button id="button2" onclick="history.back()">뒤로가기</button>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div style="border-top: 2px solid black; margin-top: 3%;">
+                <div th:utext="${pro.pro_content}">
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- logo carousel -->
+        <div class="logo-carousel-section" style="margin-top: 3%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo-carousel-inner">
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/서울시로고.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/환경부로고.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/시민연대.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/엘지전자.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="/assets/img/company-logos/삼성전자.png" alt="" style="margin-top: 8px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end logo carousel -->
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true" th:object="${user}">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div style="text-align: right;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form method="post" action="exchange">
+                        <div class="container-fluid">
+                            <div class="row">
+
+                                <div class="col-md-5 kop">
+                                    <div>
+                                        <img th:src="@{/img/product/__${pro.pro_img_save_name}__}" alt=""
+                                             style="width: 100%;">
+                                    </div>
+
+                                    <div id="kop2">
+                                        <p style="font-weight: 700; font-size: 17px; font-family: 'GmarketSansMedium', sans-serif"
+                                           th:utext="${pro.pro_name}"></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-7">
+
+                                    <div>
+                                        <input type="hidden" name="user_id" th:value="${user.user_id}">
+                                        <input type="hidden" name="pro_num" th:value="${pro.pro_num}">
+                                        <input type="hidden" name="user_name" th:value="${user.user_name}">
+                                        <input type="hidden" name="user_email" th:value="${user.user_email}">
+                                        <input type="hidden" name="pro_name" th:value="${pro.pro_name}">
+                                        <input type="hidden" name="pro_img_save_name"
+                                               th:value="${pro.pro_img_save_name}">
+                                    </div>
+
+                                    <div>
+                                        <table id="table1" style="margin-bottom: 3%;">
+                                            <thead>
+                                            <tr style="font-weight: 700;">
+                                                <td colspan="2">
+                                                    그린포인트 교환 <span
+                                                        style="color: darkred;"> (*환불이 힘드니 고심해서 결제해주세요) </span>
+                                                </td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <tr>
+                                                <td style="color: #888;">
+                                                    상품명
+                                                </td>
+                                                <td th:utext="${pro.pro_name}"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color: #888;">유저 아이디
+                                                </td>
+                                                <td name="user_id" th:value="${user.user_id}"
+                                                    th:utext="${user.user_id}"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color: #888;">현재 포인트</td>
+                                                <td><input type="text" name="user_point" th:value="${user.user_point}"
+                                                           readonly style="background: #e6e6e6; border:none;"></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="color: #888;">결제 포인트</td>
+                                                <td><input type="text" name="pay_point" th:value="${pro.pro_point}"
+                                                           readonly style="background: #e6e6e6; border:none;"></td>
+                                            </tr>
+
+                                            <tr style="border-bottom: 2px solid black;">
+                                                <td style="color: #888;">잔여 포인트</td>
+                                                <td><input type="text" name="remain_point"
+                                                           th:value="${user.user_point} - ${pro.pro_point}" readonly
+                                                           style="background: #e6e6e6; border:none;"></td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <div style="text-align: right;">
+                                        <input type="submit" value="결제하기" id="button3">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="button4">
+                                            취소
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- modal end -->
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunny.green.dao.UserDao">
+
+    <!--    회원가입-->
+    <insert id="joinUser" useGeneratedKeys="true" keyProperty="user_id">
+        insert into user(user_id, user_pass, user_name, user_email, user_tel, zip_code, address1, address2, address3,
+                         address4)
+        values (#{user_id}, #{user_pass}, #{user_name}, #{user_email}, #{user_tel}, #{zip_code}, #{address1},
+                #{address2}, #{address3}, #{address4})
+    </insert>
+
+    <!--  로그인    -->
+    <select id="selectUser" resultType="com.sunny.green.vo.UserVo">
+        select *
+        from user
+        where user_id = #{user_id}
+          and user_pass = #{user_pass}
+    </select>
+
+    <!-- 유저 선택   -->
+    <select id="selectUserId" resultType="com.sunny.green.vo.UserVo">
+        select user_id
+        from user
+        where user_id = #{user_id}
+    </select>
+
+    <!-- 유저 아이디 찾기 -->
+    <select id="selectUserId2" resultType="com.sunny.green.vo.UserVo">
+        select user_id
+        from user
+        where user_name = #{user_name} and user_email = #{user_email}
+    </select>
+
+    <!-- 유저 비밀번호 찾기 -->
+    <select id="selectUserPass" resultType="com.sunny.green.vo.UserVo">
+        select *
+        from user
+        where user_name = #{user_name} and user_id = #{user_id} and user_email = #{user_email}
+    </select>
+
+    <!-- 유저 정보 불러오기   -->
+    <select id="selectAll1" resultType="com.sunny.green.vo.UserVo">
+        select *
+        from user
+        where user_id = #{user_id}
+    </select>
+
+    <!-- 개인정보 수정   -->
+    <update id="updateUser">
+        update user
+        set user_id    = #{user_id}
+          , user_pass  = #{user_pass}
+          , user_name  = #{user_name}
+          , user_email = #{user_email}
+          , user_tel   = #{user_tel}
+          , zip_code   = #{zip_code}
+          , address1   = #{address1}
+          , address2   = #{address2}
+          , address3   = #{address3}
+          , address4   = #{address4}
+          , user_point = #{user_point}
+        where user_id = #{user_id}
+    </update>
+
+    <!-- 아이디 삭제   -->
+    <delete id="deleteId">
+        delete
+        from user
+        where user_id = #{user_id}
+    </delete>
+
+    <!-- 유저 포인트   -->
+    <update id="updatePoint">
+        update user
+        set user_point = #{user_point}
+        where user_id = #{user_id}
+    </update>
+
+    <select id="selectAll" resultType="com.sunny.green.vo.UserVo">
+        SELECT * FROM user;
+    </select>
+
+    <select id="selectAll2" resultType="com.sunny.green.vo.UserVo">
+        SELECT *
+        FROM user
+        <where>
+            <if test="searchType=='user_name' and keyword != null and keyword != '' ">
+                AND user_name like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType=='user_id' and keyword != null and keyword != '' ">
+                AND user_id like CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType=='user_tel' and keyword != null and keyword != '' ">
+                AND user_tel like CONCAT('%', #{keyword}, '%')
+            </if>
+
+        </where>
+    </select>
+
+    <!-- 특정 이메일 불러오기 -->
+    <select id="selectEmail" resultType="com.sunny.green.vo.UserVo">
+        select user_email from user where user_id = #{user_id}
+    </select>
+
+    <!-- 마지막 포인트 지급 -->
+    <update id="update_last1">
+        update user set user_point = #{user_point} where user_id = #{user_id}
+    </update>
+</mapper>

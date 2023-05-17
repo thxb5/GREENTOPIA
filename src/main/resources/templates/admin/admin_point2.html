@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout2.html}">
+<link href="/css/board.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title> 포인트 결제 </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div layout:fragment="admin_content">
+    <div class="container" id="box" style="margin-top: 120px; text-align: center">
+        <form action="/update_last" method="post">
+            <h2>포인트 지급</h2>
+            <div style="text-align: center; margin-left: 30%;">
+                <table>
+                    <tbody>
+                      <tr>
+                          <td>예약 번호</td>
+                          <td>
+                              <input type="number" name="pu_no" th:value="${pick.pu_no}" readonly>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>아이디</td>
+                          <td><input type="text" name="user_id" th:value="${pick.user_id}" readonly> </td>
+                      </tr>
+                      <tr>
+                          <td>물품 이름</td>
+                          <td>
+                              <input type="text" name="category_name" th:value="${pick.category_name}" readonly>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>물품 포인트</td>
+                          <td>
+                              <input type="number" name="category_point" th:value="${pick.category_point}" readonly>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>물품 개수</td>
+                          <td>
+                              <input type="number" name="category_count" th:value="${pick.pu_category_count}" readonly>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>입금 포인트</td>
+                          <td>
+                              <input type="number" name="give_point" readonly>
+                          </td>
+                      </tr>
+
+                      <tr>
+                          <td>유저 현재 잔여 포인트</td>
+                          <td>
+                              <input type="number" name="remain_point" th:value="${user.user_point}" readonly>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>총합 포인트</td>
+                          <td><input type="text" name="user_point" readonly></td>
+                      </tr>
+                      <tr>
+                          <td>예약 상태</td>
+                          <td>
+                              <select class="form-control" name="pu_status" id="pu_status" style="background-color: white;">
+                                  <option value="포인트지급">포인트지급</option>
+                              </select>
+                          </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 5%;">
+            <input type="submit" value="지급" style="width: 100px; font-size: 30px; font-weight: 700; color:white; background: #2a6a47;">
+            </div>
+        </form>
+        <script>
+            // 필요한 요소들을 가져옴
+            var categoryPointElement = document.getElementsByName('category_point')[0];
+            var categoryCountElement = document.getElementsByName('category_count')[0];
+            var givePointElement = document.getElementsByName('give_point')[0];
+            var remainPointElement = document.getElementsByName('remain_point')[0];
+            var userPointElement = document.getElementsByName('user_point')[0];
+
+            // category_point과 category_count를 곱하여 give_point에 표시 (소수점 제외)
+            var categoryPoint = parseInt(categoryPointElement.value);
+            var categoryCount = parseInt(categoryCountElement.value);
+            var givePoint = categoryPoint * categoryCount;
+            givePointElement.value = givePoint;
+
+            // give_point와 remain_point를 더하여 user_point에 표시 (소수점 제외)
+            var remainPoint = parseInt(remainPointElement.value);
+            var userPoint = givePoint + remainPoint;
+            userPointElement.value = userPoint;
+        </script>
+    </div>
+</div>
+
+</body>
+</html>

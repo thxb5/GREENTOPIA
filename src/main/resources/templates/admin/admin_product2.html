@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout2.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title> 관리자페이지 </title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const enroll = document.querySelector('#deletePro');
+
+            enroll.addEventListener("click", function (e) {
+                if (!confirm('삭제하시겠습니까?')) {
+                    e.preventDefault();
+                    alert("취소 되었습니다");
+                    history.back();
+                } else {
+                    alert("삭제되었습니다.");
+                }
+
+            });
+
+        })
+    </script>
+
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+
+    <div class="container">
+        <table th:object="${product}" style="margin-top: 5%; width:100%; text-align: center;">
+            <tbody>
+            <tr>
+                <td style="background: #e6e6e6; border-right: 2px solid #888; border-bottom: 2px solid #888; border-top: 2px solid black; font-weight: 700;">
+                    상품명
+                </td>
+                <td th:utext="${product.pro_name}" style="border-bottom: 2px solid #888; border-top: 2px solid black;">
+                    1
+                </td>
+            </tr>
+            <tr>
+                <td style="background: #e6e6e6; border-right: 2px solid #888; border-bottom: 2px solid #888; font-weight: 700;">
+                    상품내용
+                </td>
+                <td th:utext="${product.pro_content}" style="border-bottom: 2px solid #888;">2</td>
+            </tr>
+            <tr>
+                <td style="background: #e6e6e6; border-right: 2px solid #888; border-bottom: 2px solid #888; font-weight: 700;">
+                    지불포인트
+                </td>
+                <td th:utext="${product.pro_point}" style="border-bottom: 2px solid #888;">3</td>
+            </tr>
+            <tr>
+                <td style="background: #e6e6e6; border-right: 2px solid #888; border-bottom: 2px solid #888; font-weight: 700;">
+                    지급처
+                </td>
+                <td th:utext="${product.pro_from}" style="border-bottom: 2px solid #888;">4</td>
+            </tr>
+            <tr>
+                <td style="background: #e6e6e6; border-right: 2px solid #888; border-bottom: 2px solid #888; font-weight: 700;">
+                    사진
+                </td>
+                <td style="border-bottom: 2px solid #888;">
+                    <img th:src="@{/img/product/__${proImgVo.pro_img_save_name}__}" style="width: 300px;"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="display: flex; float: right; margin-right: 40%; margin-top: 5%;">
+        <button style="background: #2a722d; border: none; width: 120px; height: 40px;">
+            <a th:href="@{product4(pro_num=${product.pro_num})}"
+               style="color: white; font-weight: 700; font-size: 18px;">수정</a></button>
+        <button style="background: #2a722d; border: none; margin-left: 10px; width: 120px; height: 40px;">
+            <a id="deletePro" th:href="@{deletePro(pro_num=${product.pro_num})}"
+               style="color: white; font-weight: 700; font-size: 18px;">삭제</a></button>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 전체 컨테이너 (공통) */
+.container_content_all{
+    margin-top: 100px;
+    margin-bottom: 70px;
+    font-family: 'GmarketSansMedium';
+}
+
+/* 메인 컨테이너 (공통) */
+.container_content {
+    margin-top: 25px;
+}
+
+
+/* 상단 배너 이미지 (공통) */
+.img_header {
+    width: 100%;
+}
+.textDiv_header {
+    position: absolute;
+    left: 492px;
+    top: 177px;
+}
+.text_header{
+    width: 220px;
+    font-size: 47px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #3c3535;
+    border-bottom: 2px solid #d7aa45;
+}
+
+
+/* 페이지별 단계  (공통)*/
+.box_step {
+    margin-bottom: 60px;
+}
+/* 현재 step 원 */
+.circle_currentStep {
+    background: linear-gradient(45deg, Violet, Orange);
+    width: 100px;
+    height: 100px;
+    border-radius: 75px;
+    position: relative;
+}
+/* 현재 step 원 이미지 */
+.circle_currentStep > i {
+    font-size: 45px;
+    color: white;
+    margin-top: 27px;
+    margin-left: 30px;
+}
+/* 현재 step과 다음 step 연결선 */
+#line_stepConnect:after {
+    content: '';
+    width: 130px;
+    height: 2px;
+    background: #d3d3d3;
+    position: absolute;
+    top: 51px;
+    right: -125px;
+    z-index: -1;
+}
+/* 다음 step 원 */
+.circle_nextStep {
+    background: #dfdfdf;
+    width: 100px;
+    height: 100px;
+    border-radius: 75px;
+    position: relative;
+}
+/* 다음 step 원 이미지 */
+.circle_nextStep > i {
+    font-size: 45px;
+    color: #e9e8e8;
+    margin-top: 25px;
+    margin-left: 31px;
+}
+/* 두번째 step과 세번째 step 연결선 */
+#line_stepConnect2:after {
+    content: '';
+    width: 133px;
+    height: 2px;
+    background: #d3d3d3;
+    position: absolute;
+    top: 51px;
+    right: -122px;
+    z-index: -1;
+}
+/* step 하단 text */
+.text_step {
+    margin-top: 10px;
+    padding-right: 7px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    width: 110px;
+}
+
+/* *****pickup page***** */
+
+/* 사용자 약관 box */
+.box_checkBox {
+    display: flex;
+    width: 92%;
+    margin-left: 5%;
+}
+/* 사용자 약관 checkBox */
+#checkBox_colPersonInfo{
+    width: 19px;
+    height: 19px;
+}
+/* 사용자 약관 text */
+#text_checkBox {
+    font-size: 30px;
+    font-weight: 600;
+    color: #272785;
+}
+#text_checkBox2 {
+    color: red;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    font-weight: 600;
+}
+/* 사용자 약관 본문 */
+#text_permission{
+    height: 200px;
+    border: 1px solid #c1baba;
+    overflow: scroll;
+    color: black;
+    font-size: 13px;
+    width: 92%;
+    margin-left: 4%;
+}
+/* 사용자 약관 번호 */
+.titleNum_permission {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+
+/* 약관과 본문 경계선 */
+.line_boundary {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    border-bottom: 3px solid #cdc9c9;
+}
+
+
+/* 개인정보 입력 title */
+#box_contentTitle{
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-left: 4%;
+}
+#text_contentTitle{
+    font-size: 32px;
+    color: black;
+    font-weight: bold;
+}
+/* 개인정보 입력 title text */
+#page_content_title {
+    font-size: 30px;
+    color: #272785;
+    font-weight: bold;
+}
+/* 개인정보 입력 radio box */
+#box_radio {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+    font-size: 19px;
+    font-family: NanumBarunGothic, serif;
+}
+
+
+/* 개인정보 입력 head text */
+.text_contentHeader {
+    font-size: 22px;
+}
+.text_requiredInput {
+    color: red;
+}
+
+
+/* 개인정보 주소 */
+.box_address > input {
+    width: 45%;
+    height: 40px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+/* 개인정보 수거일 입력 */
+#DatePicker {
+    background: #fff url(../img/pickup/date_icon.png) no-repeat center right 4px;
+    background-size: 27px;
+}
+
+
+/* 개인정보 이미지 upload preview */
+#img_pickup_preview {
+    height: 120px;
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+#img_pickup_preview > li{
+    width: 142px;
+    position: relative;
+}
+
+#img_pickup_preview > li > img{
+    width: 100% !important;
+    max-height: 150px;
+}
+/* 개인정보 이미지 upload preview 삭제버튼 */
+.delBtn {
+    width: 20px;
+    height: 20px;
+    background: red;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    top: 0;
+    right: 15px;
+    position: absolute;
+}
+
+/* 개인정보 메모 */
+.pu_memo {
+    width: 750px;
+    height: 200px;
+    font-size: 20px;
+}
+
+/* pickup page 저장 및 이동 */
+.box_pageMove {
+    margin-top: 7%;
+    margin-bottom: 9%;
+    text-align: center;
+}
+/* page 저장 */
+.box_pageMove > input {
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 15px;
+    font-size: 29px;
+    width: 135px;
+    height: 55px;
+}
+/* page 이동 */
+.box_pageMove > a {
+    width: 135px;
+    height: 55px;
+    font-size: 29px;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+
+/* *****pickup2 page***** */
+
+
+
+/* page2 title text */
+.text_page2Title {
+    display: inherit;
+    width: 280px;
+    margin-left: 25px;
+    font-size: 38px;
+    font-weight: bold;
+    color: black;
+    border-bottom: 2px solid #e18323;
+}
+
+/* 선택 이미지 preview box */
+#box_recycle_preview {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 90px;
+}
+/* 선택 이미지 preview */
+#img_recycle_preview{
+    width: 350px;
+    height: 350px;
+}
+
+/* 품목 카테고리 text */
+.font_category {
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+    text-align: center;
+}
+
+/* 품목 카테고리 기본 선택 text */
+#text_demandSelect {
+    font-size: 15px;
+    margin-top: 11px;
+    margin-left: 7px;
+    color: #9d9d9d;
+}
+
+/* 품목 1차 카테고리 버튼 */
+.box_recycleCategory > input {
+    width: 95px;
+    height: 95px;
+    margin: 8px;
+}
+/* 품목 1차 카테고리 버튼 호버 */
+.box_recycleCategory > input:hover {
+    border: 3px solid #57e16b;
+}
+
+/* 1차 카테고리 이미지 List */
+#img_washing {
+    background: #fff url(../img/pickup/washing-machine.png) no-repeat center;
+    background-size: 85%;
+}
+#img_refrigerator {
+    background: #fff url(../img/pickup/refrigerator.png) no-repeat center;
+    background-size: 85%;
+}
+#img_television {
+    background: #fff url(../img/pickup/television.png) no-repeat center;
+    background-size: 85%;
+}
+#img_airConditioner {
+    background: #fff url(../img/pickup/air-conditioner.png) no-repeat center;
+    background-size: 85%;
+}
+#img_computer {
+    background: #fff url(../img/pickup/computer.png) no-repeat center;
+    background-size: 85%;
+}
+#img_solar {
+    background: #fff url(../img/pickup/solar-cell.png) no-repeat center;
+    background-size: 85%;
+}
+#img_etc {
+    background: #fff url(../img/pickup/oven.png) no-repeat center;
+    background-size: 85%;
+}
+
+/* 카테고리 이미지 선택 border 효과 */
+.clicked_menu {
+    border: 3px solid #57e16b;
+}
+/* 카테고리 이미지 선택 check 효과 */
+.box_recycleCategory a.active:after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 21px;
+    height: 25px;
+    margin: -13.5px 0 0 -10.5px;
+    background: url(../img/pickup/category_checked.jpg) no-repeat center;
+    content: '';
+}
+
+/* 2차 카테고리 버튼 */
+.btn_recycleCategory_2st {
+    background: linear-gradient(45deg, #fbff09, #8de795);
+    color: #000000;
+    font-weight: bold;
+    font-size: 18px;
+    min-width: 108px;
+    height: 61px;
+    margin: 2px;
+}
+
+/* 2차 카테고리 버튼 hover */
+.btn_recycleCategory_2st > input:hover{
+    border: 3px solid #57e16b;
+}
+
+/* 품목 선택 preview title */
+.text_cateSelectTitle {
+    font-size: 30px;
+    color: #767575;
+    margin-left: 25px;
+}
+/* 품목 선택 preview 세부 title */
+.text_cateSelectTitle2 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.minus {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 40px;
+    padding: 0;
+    position: relative;
+    top: -5px;
+    right: 3px;
+}
+.count_category {
+    width: 55px;
+    height: 45px;
+    font-size: 25px;
+    text-align: center;
+}
+.plus {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 40px;
+    padding: 0;
+    position: relative;
+    top: -5px;
+    left: 3px;
+}
+
+.button_inputCategory_delete {
+    text-align: center;
+}
+
+.text_mainCategory_preview {
+    font-size: 23px;
+    text-align: center;
+    color: black;
+}
+.text_detailCategory_preview {
+    font-size: 23px;
+    text-align: center;
+    color: black;
+}
+
+
+
+
+
+
+
+

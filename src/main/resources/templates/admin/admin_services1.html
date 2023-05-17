@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout2.html}">
+<link href="/css/board.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <title> 수거업체 페이지 </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/js/admin_service1.js"></script>
+</head>
+
+<body>
+
+<div layout:fragment="admin_content">
+  <div class="container" id="box" style="margin-top: 120px; text-align: center">
+    <h2>수거업체</h2>
+
+    <!--검색처리-->
+    <div class="search-form">
+      <div class="row" style="margin-bottom: 3%; margin-left: 0%;">
+        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+
+          <select class="form-select" name="searchType" id="search-type">
+            <option selected disabled value="">검색유형</option>
+            <option th:value="pu_memo"> 메모 </option>
+            <option th:value="pu_date"> 접수날짜 </option>
+            <option th:value="user_id" > 회원아이디 </option>
+          </select>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+          <input type="text" placeholder="검색어..." class="form-control"
+                 name="searchValue">
+        </div>
+        <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+          <button class="btn btn-base submitBtn"  name="search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round"
+                 class="feather feather-search">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--검색처리-->
+
+    <table class="table table-striped">
+      <thead class="table-success">
+      <tr>
+        <th scope="col">예약번호</th>
+        <th scope="col">주소번호</th>
+        <th scope="col">회원아이디</th>
+        <th scope="col">픽업날짜</th>
+        <th scope="col">거주형태</th>
+        <th scope="col">엘베유무</th>
+        <th scope="col">사진유무</th>
+        <th scope="col">예약메모</th>
+        <th scope="col">접수날짜</th>
+        <th scope="col">예약상태</th>
+      </tr>
+      </thead>
+      <!--   받아오는 데이터 값 ------------------->
+      <tbody id="t_body">
+      <tr th:each="list: ${service}" style="word-break: keep-all; vertical-align: middle;" >
+
+        <td th:text="${list.pu_no}" th:value="${list.pu_no}"></td>
+        <td th:text="${list.pu_address_no}" th:value="${list.pu_address_no}"></td>
+        <td th:text="${list.user_id}" th:value="${list.pu_no}"></td>
+        <td th:text="${list.pu_day}" th:value="${list.pu_day}"></td>
+        <td th:text="${list.house_no}" th:value="${list.house_no}"></td>
+        <td th:text="${list.pu_elevator}" th:value="${list.pu_elevator}"></td>
+        <td th:text="${list.pu_img}" th:value="${list.pu_img}"></td>
+        <td th:text="${list.pu_memo}" th:value="${list.pu_memo}"></td>
+        <td th:text="${list.pu_date}" th:value="${list.pu_date}"></td>
+        <td th:text="${list.pu_status}" th:value="${list.pu_status}"></td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!----- 페이징 ----->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"  id="pagingul">
+      </li>
+    </ul>
+  </nav>
+  <!----- 페이징 ----->
+  <script>
+    <!-- 검색 기능-->
+
+    $('.submitBtn').click(function () {
+      let type = $('select[name=searchType]').val();
+      let value = $('input[name=searchValue]').val();
+
+
+      $.ajax({
+        url: '/paging_service1', // 데이터를 가져올 URL_
+        type: 'post',
+        dataType: "json",
+        data:{"searchType":type,"searchValue":value},
+        success: function (data) { // 데이터를 가져온 후 실행할 콜백 함수
+          console.log(data); // 데이터 확인용
+          content = data;
+          console.log(data);
+          getData(1);
+        },
+        error: function (e) {
+          console.log("ERROR: ", e);
+        }
+      });
+    });
+  </script>
+
+</div>
+
+</body>
+</html>

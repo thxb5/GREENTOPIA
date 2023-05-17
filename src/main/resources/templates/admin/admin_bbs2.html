@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout2.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 관리자페이지 </title>
+    <link rel="stylesheet" type="text/css" href="/css/admin_bbs1.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/js/admin_bbs2.js"></script>
+
+
+</head>
+<body>
+
+<div layout:fragment="admin_content">
+    <div class="container" style="margin-top: 15px;">
+
+        <div>
+            <h1>게시판 관리</h1>
+        </div>
+        <div>
+        <ul id="list1">
+            <li><a href="/admin/bbs1" style="margin-left: 15px; color: #e6e6e6;"> 공지사항</a></li>
+            <li><a href="/admin/bbs2">QNA</a></li>
+        </ul>
+
+        <br>
+        <div class="search-form" style="display: flex;">
+            <div class="col" style="display: flex;">
+                <select class="form-select" name="searchType" id="validationCustom04" required >
+                    <option selected disabled value="">검색유형</option>
+                    <option th:value="board_title"> 타이틀 </option>
+                    <option th:value="user_id" > 아이디 </option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a valid state.
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                <input type="text" placeholder="검색어..." class="form-control"
+                       name="searchValue">
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                <button class="btn btn-base submitBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-search">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <br>
+
+        <!--   rsLisr table-->
+        <div class="admin_rsList">
+            <table class="table caption-top">
+                <thead>
+                <!-- 테이블 상단------------------->
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">아이디</th>
+                    <th scope="col">날짜</th>
+                </tr>
+                </thead>
+                <!--   받아오는 데이터 값 ------------------->
+                <tbody id="t_body">
+                <tr th:each="list: ${bbsVos}" style="word-break: keep-all; vertical-align: middle;" >
+
+                    <td th:utext="${list.board_num}"></td>
+                    <td th:utext="${list.board_title}"></td>
+                    <td th:utext="${list.user_id}"></td>
+                    <td th:utext="${#temporals.format(list.board_date, 'yyyy-MM-dd HH:mm')}"></td>
+
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <!----- 페이징 ----->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" id="pagingul">
+
+                    </li>
+                </ul>
+            </nav>
+        </div>
+            <script>
+                $('.submitBtn').click(function () {
+                    let searchType = $('select[name=searchType]').val();
+                    let searchValue = $('input[name=searchValue]').val();
+
+                    $.ajax({
+                        url: '/pagination_board_page', // 데이터를 가져올 URL_
+                        type: 'post',
+                        dataType: "json",
+                        data:{"searchType":searchType,"searchValue":searchValue},
+                        success: function (data) { // 데이터를 가져온 후 실행할 콜백 함수
+                            console.log(data); // 데이터 확인용
+                            console.log("데이터" + data);
+                            console.log("타입" + searchType);
+                            console.log("밸류" + searchValue);
+                            getData(1);
+                        },
+                        error: function (e) {
+                            console.log("ERROR: ", e);
+                        }
+                    });
+                });
+            </script>
+    </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

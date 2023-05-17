@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout3.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 나의 예약 </title>
+    <link rel="stylesheet" href="/css/myPage/myWrite.css" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content" style="text-align: left;">
+
+    <div class="container-fluid">
+
+        <div class="col" style="color: black;">
+            <p style="font-size: 26px; font-weight: 700; letter-spacing: -2px; color: #0F4229;">나의 예약</p>
+
+            <div id="greenBox">
+
+                <!-- 검색 -->
+                <div class="no-gutters" style="display: flex;">
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <label for="search-type" hidden>검색 유형</label>
+                        <select class="form-control" id="search-type" name="searchType">
+                            <option selected disabled value="">검색유형</option>
+                            <option th:value="pu_memo"> 메모 </option>
+                            <option th:value="pu_date"> 접수날짜 </option>
+                            <option th:value="user_id" > 회원아이디 </option>
+                        </select>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                        <label for="search-value" hidden>검색어</label>
+                        <input type="text" placeholder="검색어..." class="form-control" id="search-value"
+                               name="searchValue">
+                    </div>
+                    <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                        <button type="submit" class="btn btn-base submitBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-search">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 본문 -->
+
+                <table class="table1">
+                    <thead>
+                    <tr>
+                        <th scope="col">예약번호</th>
+                        <th scope="col">주소번호</th>
+                        <th scope="col">회원아이디</th>
+                        <th scope="col">픽업날짜</th>
+                        <th scope="col">예약메모</th>
+                        <th scope="col">접수날짜</th>
+                        <th scope="col">예약상태</th>
+                    </tr>
+                    </thead>
+                    <tbody id="t_body">
+                    <tr th:each="list: ${pickup}" style="word-break: keep-all; vertical-align: middle;" >
+
+                        <td th:text="${list.pu_no}" th:value="${list.pu_no}"></td>
+                        <td th:text="${list.pu_address_no}" th:value="${list.pu_address_no}"></td>
+                        <td th:text="${list.user_id}" th:value="${list.pu_no}"></td>
+                        <td th:text="${list.pu_day}" th:value="${list.pu_day}"></td>
+                        <td th:text="${list.pu_memo}" th:value="${list.pu_memo}"></td>
+                        <td th:text="${list.pu_date}" th:value="${list.pu_date}"></td>
+                        <td th:text="${list.pu_status}" th:value="${list.pu_status}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <!-- 페이징 -->
+
+                <div class="row" style="margin-top: 5%;">
+                    <!----- 페이징 ----->
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" id="pagingul">
+
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <script>
+                    $('.submitBtn').click(function () {
+                        let type = $('select[name=searchType]').val();
+                        let value = $('input[name=searchValue]').val();
+
+                        $.ajax({
+                            url: '/paging_reservation', // 데이터를 가져올 URL_
+                            type: 'post', // HTTP 요청 방법(Method)을 POST로 변경
+                            dataType: "json",
+                            data: {"searchType": type, "searchValue": value},
+                            success: function (data) { // 데이터를 가져온 후 실행할 콜백 함수
+                                console.log(data); // 데이터 확인용
+                                content = data;
+                                console.log("데이터" + data);
+                                getData(1);
+                                console.log("타입" + type);
+                                console.log("밸류" + value);
+                            },
+                            error: function (e) {
+                                console.log("ERROR: ", e);
+                            }
+                        });
+                    });
+                </script>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+</body>
+</html>

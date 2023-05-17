@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunny.green.dao.ExchangeDao">
+
+    <!-- 상품과 상품 이미지를 조인한 결과를 반환하는 쿼리 -->
+    <select id="selectProductAll" resultType="com.sunny.green.vo.ProductWithImgVo">
+        SELECT p.*, pi.pro_img_save_name, pi.pro_img_path
+        FROM product p
+                 JOIN pro_img pi ON p.pro_num = pi.pro_num
+        ORDER BY p.pro_num DESC LIMIT 0, 3;
+    </select>
+
+    <!-- 특정 상품의 정보를 보기 위한 클릭  -->
+    <select id="selectProOne" resultType="com.sunny.green.vo.ProductWithImgVo">
+        select p.*, pi.*
+        from product p
+                 join pro_img pi on p.pro_num = pi.pro_num
+        where p.pro_num = #{pro_num}
+    </select>
+
+    <!--    교환 내역 저장-->
+    <insert id="insertExchange" useGeneratedKeys="true" keyProperty="ex_num">
+        insert into exchange(pro_num, user_id, user_name, user_email, pro_name, pro_img_save_name, user_point,
+                             pay_point, remain_point, ex_uuid_num)
+        values (#{pro_num}, #{user_id}, #{user_name}, #{user_email}, #{pro_name}, #{pro_img_save_name}, #{user_point},
+                #{pay_point}, #{remain_point}, #{ex_uuid_num})
+    </insert>
+
+    <!--  교환 내역 불러오기  -->
+    <select id="selectExchangeOne" resultType="com.sunny.green.vo.ExchangeVo">
+        select *
+        from exchange
+        where ex_num = #{ex_num};
+    </select>
+
+    <select id="selectExchangeId" resultType="com.sunny.green.vo.ExchangeVo">
+        select *
+        from exchange
+        where user_id = #{user_id}
+        order by ex_num desc limit 0,2;
+    </select>
+</mapper>

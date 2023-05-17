@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#greenBox {
+    box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72);
+}
+
+.ticket {
+    width: 100%;
+    margin-top: 35px;
+}
+
+.ticketHead{
+    background-color : #2a6a47;
+    height: 50px;
+}
+
+.ticketContent{
+    background-color : #d5d6da;
+    height: 150px;
+}
+
+#boarding {
+    font-size : 20px;
+    color: white;
+    text-align: left;
+    letter-spacing: -1px;
+    margin-top: 13px;
+    font-family: 'GmarketSansMedium', serif;
+    margin-left: 5%;
+}
+
+#success{
+    text-align: center;
+    margin-top: 30px;
+}
+
+#flightNum {
+    color: white;
+    margin-top: 15px;
+    font-size: 15px;
+    letter-spacing: -1px;
+}
+
+#passengerNum {
+    color: white;
+    margin-top: 15px;
+    font-size: 15px;
+    letter-spacing: -1px;
+}
+.arrive{
+    color: gray;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#arriveCity {
+    color: #005fa7;
+    font-size: 30px;
+}
+
+#departCity {
+    color: #005fa7;
+    font-size: 30px;
+}
+
+#qr {
+    width: 80px;
+    height: 80px;
+    margin-top: 30px;
+}
+
+tbody tr td {
+    padding: 0 0 5px 20px;
+    vertical-align: middle;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<meta charset="UTF-8">
+<link href="/css/notice.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="UTF-8">
+  <title>게시글 업데이트</title>
+  <script src="/js/ckeditor/ckeditor.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+<div layout:fragment="content" style="padding-bottom: 50px; padding-top: 120px;">
+  <div class="container">
+    <div class="notice-page">
+      <div class="notice">
+        <p style="font-size: 35px; font-family: 'GmarketSansMedium'; font-weight: bold;">Q&A 수정</p>
+      </div>
+
+      <div class="container">
+        <form action="/updateNotice2" method="post">
+          <table th:object="${notice}" style="width: 100%;">
+            <input type="hidden" th:value="${notice.notice_num}" name="notice_num">
+            <tbody>
+            <tr>
+              <td style="font-weight: 700; font-family: 'GmarketSansMedium', sans-serif;">No</td>
+              <td th:utext="${notice.notice_num}" th:value="${notice.notice_num}"
+                  style="border-bottom: 2px solid #888; border-top: 2px solid black;">
+              </td>
+            </tr>
+            <tr>
+              <td style="font-weight: 700; font-family: 'GmarketSansMedium', sans-serif;">등록일</td>
+              <td th:utext="${#temporals.format(notice.notice_date, 'yyyy-MM-dd HH:mm')}"
+                  style="border-top: 2px solid black;"></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 700; font-family: 'GmarketSansMedium', sans-serif;">제목</td>
+              <td colspan="2"><input type="text" th:value="${notice.notice_title}" name="notice_title"
+                                     style="width: 100%;"></td>
+            </tr>
+            <tr>
+              <td style="font-weight: 700; font-family: 'GmarketSansMedium', sans-serif;">내용</td>
+              <td colspan="2"><textarea id="editor" th:value="${notice.notice_content}"
+                                        th:utext="${notice.notice_content}"
+                                        name="notice_content"></textarea></td>
+            </tr>
+            <script>
+              CKEDITOR.replace('editor');
+            </script>
+            </tbody>
+          </table>
+          <div style="text-align: center; margin-top: 3%;">
+            <a class="btn btn-primary me-md-2" role="button" id="write-article"
+               style="background: #2a6a47; color: white; border: none; font-weight: 700;" href="/notice">취소</a>
+            <input type="submit" class="btn btn-primary me-md-2" value="등록"
+                   style="background: #2a6a47; color: white; font-weight: 700; border: none;">
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+</body>
+</html>

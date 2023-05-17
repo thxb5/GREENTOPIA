@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+#box1 {
+
+    box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72);
+    -webkit-box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72);
+    -moz-box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72);
+}
+
+#box2 {
+    text-align: center;
+}
+
+#box2 > div {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#box2 > .col-md-3 {
+    border-right: 1px solid #e6e6e6;
+}
+
+#reservation {
+    width: 97%;
+    height: 250px;
+    border: 2px solid #e6e6e6;
+    margin-left: 15px;
+}
+
+#greenPoint {
+    text-align: left;
+    border-bottom: 1px solid #e6e6e6;
+    width: 91%;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#wrote_wr, #wrote_com {
+    width: 100%;
+    margin-top: 10px;
+    color: white;
+    height: 30px;
+}
+
+#wrote_wr {
+    background: darkorange;
+}
+
+#wrote_com {
+    background : #2a6a47;
+}
+
+#userProfile {
+    background: linear-gradient(to right, #05c75d, #40c7cc);
+    color: white;
+}
+
+#profiles > div > span {
+    color: black;
+}
+
+#profiles > div {
+    text-align: left;
+    margin-left: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.pol2 {
+    font-weight: 700;
+    font-size: 18px;
+    height: 7px;
+    text-align: left;
+
+}
+
+.table1 {
+    width: 100%;
+    border: 1px solid #e6e6e6;
+
+    margin-top: 10px;
+    table-layout: fixed;
+}
+
+.table1 > thead {
+    border-bottom: 1px solid black;
+    background: #f0eee7;
+}
+
+.table1 > tbody {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.table1 > tbody > tr > td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#table2 {
+    width: 100%;
+    border: 1px solid #e6e6e6;
+    margin-top: 10px;
+    table-layout: fixed;
+    border-top: 1px solid black;
+}
+
+#table2 > thead {
+    background: #f0eee7;
+}
+
+#reservation > div > div > div > img {
+    margin-top: 5px;
+}
+
+#reservation > div > div > div > p {
+    color: black;
+    letter-spacing: -1px;
+}
+
+
+

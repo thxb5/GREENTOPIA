@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title> 회원 정보 찾기 </title>
+    <script src="/js/searchUser.js"></script>
+    <style>
+        #box {
+            text-align: center;
+            box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72);
+            -webkit-box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72);
+            -moz-box-shadow: 20px 16px 19px 0px rgba(0,0,0,0.72);
+        }
+
+        #button1 {
+            border: none;
+            width: 120px;
+            height: 50px;
+            font-weight: 700;
+            font-size: 20px;
+            background: rgba(26, 121, 64, 0.8);
+            color: white;
+        }
+
+        #button2 {
+            border: none;
+            width: 120px;
+            height: 50px;
+            font-weight: 700;
+            font-size: 20px;
+            background: white;
+        }
+
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content" style="padding-bottom: 50px;">
+    <div class="container" id="box" style="margin-top: 140px; font-family: GmarketSansMedium,serif;">
+            <div class="row">
+                <div class="col-md-6" style="height: 450px;">
+                    <div style="margin-top: 5%; margin-left: 6%;">
+                    <i class="bi bi-person-circle" style="font-size: 50px;"></i>
+                        <p style="font-size: 30px; font-weight: 700;">아이디 찾기</p>
+                    </div>
+                    <div class="container" style="text-align: center;">
+
+                        이름 : <input type="text" name="id_name" id="id_name" style="margin-left: 2.5%;"> <br>
+                        이메일 : <input type="email" name="id_email" id="id_email" style="margin-top: 3%;"> <br>
+                        <button type="button" onclick="checkUserId()" id="button1" style="margin-left:7%; margin-top: 5%;">찾기</button><br>
+                        <br>
+                        <span id="idCheckMessage" style="font-weight: 700; color: red;"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="background: linear-gradient(to left, #0F4229, rgba(26, 121, 64, 0.8)); height: 450px;">
+                    <div style="margin-top: 5%; margin-left: 6%;">
+                    <i class="bi bi-key-fill" style="font-size: 50px;"></i>
+                    <p style=" font-size: 30px; font-weight: 700;">비밀번호 찾기</p>
+                    </div>
+                    <div class="container" style="text-align: center;">
+
+                        이름 : <input type="text" name="pass_name" id="pass_name" style="margin-left: 2.5%;"> <br>
+                        아이디 : <input type="text" name="pass_id" id="pass_id" style="margin-top: 3%;"> <br>
+                        이메일 : <input type="email" name="pass_email" id="pass_email" style="margin-top: 3%;"> <br>
+                        <button type="button" onclick="checkUserPass()" id="button2" style="margin-left:7%; margin-top: 5%;">메일 발송</button><br>
+                        <br>
+                        <span id="passCheckMessage" style="font-weight: 700;"></span>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+</body>
+
+</html>

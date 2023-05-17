@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout2.html}">
+
+<head>
+  <meta charset="UTF-8">
+  <title> 관리자페이지 </title>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const enroll = document.querySelector('#deleteId');
+
+      enroll.addEventListener("click", function (e) {
+        if (!confirm('삭제하시겠습니까?')) {
+          e.preventDefault();
+          alert("취소 되었습니다");
+          history.back();
+        } else {
+          alert("삭제되었습니다.");
+        }
+
+      });
+
+    })
+  </script>
+
+</head>
+<body>
+<div layout:fragment="admin_content">
+  <div class="container" id="box" style="margin-top: 50px; text-align: center" th:object="${user}"  >
+    <form action="/admin/modify" method="post">
+      <h2>회원정보수정</h2>
+      <div align="center">
+        <div class="container" style="text-align: center; width: 600px"   >
+          <table class="table table-success" >
+            <tr>
+              <th>아이디</th>
+              <td>
+                <input type="text" class="form-control" name="user_id" id="userId" th:value="${user.user_id}" readonly >
+              </td>
+            </tr>
+            <tr>
+              <th>비밀번호</th>
+              <td><input type="text" class="form-control" name="user_pass" th:value="${user.user_pass}"></td>
+            </tr>
+            <tr>
+              <th>회원명</th>
+              <td><input type="text" class="form-control" name="user_name"  th:value="${user.user_name}" ></td>
+            </tr>
+            <tr>
+              <th>이메일</th>
+              <td><input type="email" class="form-control" name="user_email"  th:value="${user.user_email}"   /></td>
+            </tr>
+            <tr>
+              <th>전화번호</th>
+              <td><input type="text" class="form-control" name="user_tel"  th:value="${user.user_tel}" /></td>
+            </tr>
+            <tr>
+              <th>우편번호</th>
+              <td><input type="text" class="form-control" name="zip_code"  th:value="${user.zip_code}"/></td>
+            </tr>
+            <tr>
+              <th>주소1</th>
+              <td><input type="text" class="form-control" name="address1"  th:value="${user.address1}" /></td>
+            </tr>
+            <tr>
+              <th>주소2</th>
+              <td><input type="text" class="form-control" name="address2"  th:value="${user.address2}"   /></td>
+            </tr>
+            <tr>
+              <th>주소3</th>
+              <td><input type="text" class="form-control" name="address3"  th:value="${user.address3}" /></td>
+            </tr>
+            <tr>
+              <th>주소4</th>
+              <td><input type="text" class="form-control" name="address4"  th:value="${user.address4}" /></td>
+            </tr>
+            <tr>
+              <th>포인트</th>
+              <td><input type="text" class="form-control" name="user_point"  th:value="${user.user_point}" /></td>
+            </tr>
+          </table>
+          <input type="submit" class="btn btn-success" value="수정" />
+          <a id="deleteId" th:href="@{/admin/delete(user_id=${user.user_id})}" class="btn btn-danger"  >삭제</a>
+          <button type="button" class="btn btn-success" onclick="alert('취소 되었습니다'); history.back();" id="modify3">취소</button>
+        </div>
+      </div>
+    </form>
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunny.green.dao.PickupDao">
+    <!--  pickup Address에 값 입력  -->
+    <insert id="pickupAddressSave"  useGeneratedKeys="true" keyProperty="pu_address_no">
+        Insert into pickup_address(user_id, pu_address_name, pu_address_tel, pu_address_zip, pu_address1, pu_address2, pu_address3, pu_address4 )
+        values (#{user_id}, #{pu_address_name}, #{pu_address_tel}, #{pu_address_zip}, #{pu_address1}, #{pu_address2}, #{pu_address3},#{pu_address4})
+        <selectKey keyProperty="pu_address_no" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+    <insert id="pickupInfoSave" useGeneratedKeys="true" keyProperty="pu_no">
+        Insert into pickup_info(pu_address_no, user_id, house_no, pu_elevator, pu_day, pu_img, pu_memo)
+        values (#{pu_address_no}, #{user_id}, #{house_no}, #{pu_elevator}, #{pu_day}, #{pu_img}, #{pu_memo})
+        <selectKey keyProperty="pu_no" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+    <insert id="pickupCategorySave">
+        Insert into pickup_category(pu_no, category_no, pu_category_count)
+        values (#{pu_no}, #{category_no}, #{pu_category_count})
+    </insert>
+    <insert id="pickupImgSave" useGeneratedKeys="true" keyProperty="pu_img_no">
+        Insert into pickup_img(pu_img_origin_name, pu_img_save_name, pu_img_path)
+        values (#{pu_img_origin_name}, #{pu_img_save_name}, #{pu_img_path})
+        <selectKey keyProperty="pu_img_no" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+    <update id="pickupImgUpdate">
+        UPDATE pickup_img set pu_no = #{pu_no} where pu_img_no = #{pu_img_no}
+    </update>
+    <select id="pickupImgView" resultType="com.sunny.green.vo.PickupImgVo">
+        SELECT * from pickup_img where pu_img_no = #{pu_img_no};
+    </select>
+
+    <!--   admin_rs 에서 모든 예약자정보를 가져옴 -->
+    <select id="rsList" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT * FROM pickup_info;
+    </select>
+
+    <!--    rsList 검색  -->
+    <select id="rsList2" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT *
+        FROM pickup_info;
+        <where>
+            <if test="searchType=='pu_memo' and searchValue != null and searchValue != '' ">
+                AND pu_memo like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='pu_date' and searchValue != null and searchValue != '' ">
+                AND pu_date like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='user_id' and searchValue != null and searchValue != '' ">
+                AND user_id like CONCAT('%', #{searchValue}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!--   admin_rs 에서 모든 예약자정보를 가져옴 -->
+    <select id="oneList1" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT * FROM pickup_info where user_id = #{user_id};
+    </select>
+
+    <!--    rsList 검색  -->
+    <select id="oneList2" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT *
+        FROM pickup_info
+        where user_id = #{user_id};
+        <where>
+            <if test="searchType=='pu_memo' and searchValue != null and searchValue != '' ">
+                AND pu_memo like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='pu_date' and searchValue != null and searchValue != '' ">
+                AND pu_date like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='user_id' and searchValue != null and searchValue != '' ">
+                AND user_id like CONCAT('%', #{searchValue}, '%')
+            </if>
+        </where>
+    </select>
+
+
+    <!--    예약자상세조회-->
+    <select id="pu_information" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT p.*, h.*, a.*
+        FROM pickup_info p
+                 JOIN pickup_house h ON p.house_no = h.house_no
+                 JOIN pickup_address a ON p.pu_address_no = a.pu_address_no
+        WHERE p.pu_no = #{pu_no}
+    </select>
+
+    <update id="update_info">
+        update pickup_info set pu_status = #{pu_status}
+        where pu_no = #{pu_no}
+    </update>
+
+    <delete id="rs_delete">
+        delete from pickup_info where pu_no = #{pu_no}
+    </delete>
+
+    <select id="myPageReservation" resultType="com.sunny.green.vo.PickupDetailVo">
+        select * from pickup_info where user_id = #{user_id} order by pu_no desc limit 0,3;
+    </select>
+
+
+    <!--   admin_rs 에서 모든 예약자정보를 가져옴 -->
+    <select id="rs_service1" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT * FROM pickup_info where pu_status = '수거중';
+    </select>
+
+    <!--    rsList 검색  -->
+    <select id="rs_service2" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT *
+        FROM pickup_info;
+        where pu_status = '수거중';
+        <where>
+            <if test="searchType=='pu_memo' and searchValue != null and searchValue != '' ">
+                AND pu_memo like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='pu_date' and searchValue != null and searchValue != '' ">
+                AND pu_date like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='user_id' and searchValue != null and searchValue != '' ">
+                AND user_id like CONCAT('%', #{searchValue}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!--   admin_rs 에서 모든 예약자정보를 가져옴 -->
+    <select id="rs_point1" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT * FROM pickup_info where pu_status = '수거완료';
+    </select>
+
+    <!--    rsList 검색  -->
+    <select id="rs_point2" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT *
+        FROM pickup_info;
+        where pu_status = '수거완료';
+        <where>
+            <if test="searchType=='pu_memo' and searchValue != null and searchValue != '' ">
+                AND pu_memo like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='pu_date' and searchValue != null and searchValue != '' ">
+                AND pu_date like CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="searchType=='user_id' and searchValue != null and searchValue != '' ">
+                AND user_id like CONCAT('%', #{searchValue}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 모든 데이터 가져오기 -->
+    <select id="selectLast" resultType="com.sunny.green.vo.PickupDetailVo">
+        SELECT i.*, c.*, d.*
+        FROM pickup_info d
+                 JOIN pickup_category i ON i.pu_no = d.pu_no
+                 JOIN product_category c ON i.category_no = c.category_no
+        WHERE i.pu_no = #{pu_no}
+    </select>
+
+    <update id="update_last2">
+        update pickup_category set give_point = #{give_point} where pu_no = #{pu_no}
+    </update>
+
+
+</mapper>

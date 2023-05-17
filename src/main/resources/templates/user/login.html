@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 로그인 </title>
+    <link rel="stylesheet" href="/css/login.css" type="text/css">
+</head>
+<body>
+<div layout:fragment="content" style="padding-bottom: 50px;">
+    <div class="container" id="box" style="margin-top: 140px; font-family: 'GmarketSansMedium',serif;">
+        <div class="row">
+
+            <div class="col-md-6" id="box1">
+                <div class="container" style="width: 100%;">
+                    <div>
+                        <p id="text1">그린토피아</p>
+                        <p id="text2">회원이신가요?</p>
+                        <p id="text3">회원이 아닌 경우 회원가입을 진행해주세요</p>
+                        <div id="joinBox">
+                            <a href="join">회원가입</a>
+                        </div>
+                        <div id="imgBox">
+                            <img src="/img/green.png" style="width:210px; margin-top: 35px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" id="box2">
+                <div class="container">
+                    <form action="/login" method="post">
+                        <div style="text-align: left; font-size: 35px; letter-spacing: -2px; font-weight: 700; color: #0F4229 !important;">
+                            <span>로그인</span>
+                        </div>
+                        <div style="text-align: left;">
+                            <input type="text" name="user_id" id="userId" placeholder="아이디를 입력하세요">
+                        </div>
+                        <div style="text-align: left;">
+                            <input type="password" name="user_pass" id="userPass" placeholder="비밀번호를 입력하세요">
+                        </div>
+                        <div style="text-align: left; margin-top: 25px;">
+                            <input type="checkbox" value="아이디 저장"><span
+                                style="letter-spacing: -2px;"> 아이디를 저장하시겠습니까?</span>
+                        </div>
+                        <div style="text-align: left; margin-top: 25px;">
+                            <input type="submit" value="로그인" id="submit">
+                        </div>
+                        <div style="display: flex;">
+                            <div id="kakao" style="text-align: left;">
+                                <a href="https://kauth.kakao.com/oauth/authorize?client_id=7033be3a22ffb05c2b13405c4f9a65ac&redirect_uri=http://15.165.155.80:8080/auth/kakao/callback&response_type=code"><img src="/img/kakao_login_btn.png" style="margin-top: 20px;"></a>
+                            </div>
+                        </div>
+                        <div style="text-align: left; margin-top: 10px;">
+                            <p style="font-size:14px; letter-spacing: -2px;"><a href="/searchUser"> 아이디/비밀번호를 잊어버리셨나요? </a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

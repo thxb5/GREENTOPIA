@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunny.green.dao.AdminDao">
+
+    <!-- 상품등록 -->
+    <insert id="insertPro" useGeneratedKeys="true" keyProperty="pro_num">
+        insert into product(pro_name, pro_content, pro_point, pro_from)
+        values (#{pro_name}, #{pro_content}, #{pro_point}, #{pro_from})
+    </insert>
+
+    <!-- 상품등록 시 이미지 같이 등록 -->
+    <insert id="insertProImg" useGeneratedKeys="true" keyProperty="pro_img_no">
+        insert into pro_img(pro_num, pro_img_save_name, pro_img_path)
+        values (#{pro_num}, #{pro_img_save_name}, #{pro_img_path})
+    </insert>
+
+    <!--    모든 상품에 대한 리스트들을 가져옴-->
+    <select id="selectProAll" resultType="com.sunny.green.vo.ProductVo">
+        select *
+        from product
+        order by pro_num desc
+    </select>
+
+    <!--    특정 상품에 대한 내용으로 들어가기 위한 구문-->
+    <select id="selectPro" resultType="com.sunny.green.vo.ProductVo">
+        select *
+        from product
+        where pro_num = #{pro_num}
+    </select>
+
+    <!--    사진을 불러오기 위한 구문-->
+    <select id="selectImg" resultType="com.sunny.green.vo.ProImgVo">
+        select *
+        from pro_img
+        where pro_num = #{pro_num}
+    </select>
+
+    <!-- 상품 삭제를 위한 구문 -->
+
+    <delete id="deletePro">
+        delete
+        from product
+        where pro_num = #{pro_num}
+    </delete>
+
+    <delete id="deletePro_img">
+        delete
+        from pro_img
+        where pro_num = #{pro_num}
+    </delete>
+
+    <!--    상품 수정을 위한 구문-->
+    <update id="updatePro">
+        update product
+        set pro_name    = #{pro_name},
+            pro_content = #{pro_content},
+            pro_point   = #{pro_point},
+            pro_from    = #{pro_from}
+        where pro_num = ${pro_num}
+    </update>
+
+    <insert id="insertAdmin">
+        insert into admin(admin_id, admin_pass, user_id, user_pass)
+        values(#{admin_id}, #{admin_pass}, #{user_id}, #{user_pass})
+    </insert>
+
+
+    <select id="selectAdmin" resultType="com.sunny.green.vo.AdminVo">
+        select * from admin where admin_id = #{admin_id} and admin_pass = #{admin_pass}
+    </select>
+
+    <!-- 공지사항 -->
+    <select id="selectAdmin2" resultType="com.sunny.green.vo.AdminVo">
+        select * from admin where user_id = #{user_id}
+    </select>
+
+
+
+</mapper>

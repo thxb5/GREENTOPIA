@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout3.html}">
+<head>
+    <meta charset="UTF-8">
+    <title> 로그인 </title>
+    <link rel="stylesheet" href="/css/modify.css" type="text/css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/join.js"></script>
+
+</head>
+<body>
+<div layout:fragment="content" style="text-align: left">
+
+
+    <div class="container pol1" th:object="${user}">
+        <form action="/modify" method="post">
+            <div class="col" style="margin-top: 5%; color: black;">
+                <p style="font-size: 32px; font-weight: 700; letter-spacing: -2px; color: #0F4229;">개인정보 수정</p>
+            </div>
+
+            <div>
+                <img src="/img/join/user.png" style="width: 20px;">
+                <input type="text" name="user_id" th:value="${user.user_id}" class="readOnly"
+                       style="width:45%; background: #e6e6e6;"
+                       id="userId" readonly>
+                <span id="idCheckMessage" style="color:red; font-weight: 700; letter-spacing: -2px;"></span>
+            </div>
+
+            <div>
+                <img src="/img/join/password.png" style="width: 20px;">
+                <input type="password" name="user_pass" th:value="${user.user_pass}" class="put"
+                       style="width:45%; margin-top: 10px;">
+            </div>
+
+            <div>
+                <img src="/img/join/user.png" style="width: 20px;">
+                <input type="text" name="user_name" th:value="${user.user_name}" class="readOnly"
+                       style="width: 45%; margin-top: 10px; background: #e6e6e6;" readonly>
+            </div>
+
+            <div>
+                <img src="/img/join/email.png" style="width: 20px;">
+                <input type="email" name="user_email" th:value="${user.user_email}" class="put"
+                       style="width:45%; margin-top: 10px;">
+            </div>
+
+            <div>
+                <img src="/img/join/phone.png" style="width: 20px;">
+                <input type="number" name="user_tel" th:value="${user.user_tel}" class="put"
+                       style="width:45%; margin-top: 10px;">
+            </div>
+
+            <div>
+                <img src="/img/join/address.png" style="width: 20px;">
+                <input type="text" name="zip_code" id="sample4_postcode" th:value="${user.zip_code}" class="put"
+                       style="width:45%; margin-top: 10px;">
+                <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" id="button3"><br>
+                <input type="text" name="address1" id="sample4_roadAddress" th:value="${user.address1}"
+                       style="margin-left:26px; width:45%; margin-top: 10px;" class="put">
+                <input type="text" name="address2" id="sample4_jibunAddress" th:value="${user.address2}" class="put"
+                       style="width:45%"><br>
+                <span id="guide" style="color:#999;display:none"></span>
+                <input type="text" name="address3" id="sample4_detailAddress" th:value="${user.address3}" class="put"
+                       style="margin-left:26px; width:45%; margin-top: 10px;">
+                <input type="text" name="address4" id="sample4_extraAddress" th:value="${user.address4}" class="put"
+                       style="width: 45%;"><br>
+
+            </div>
+
+
+            <div style="margin-top: 15px; text-align: center; margin-right: 3%;">
+                <input type="submit" value="수정" id="modify2">
+                <button type="button" onclick="alert('취소 되었습니다'); history.back();" id="modify3">취소</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+</body>
+</html>

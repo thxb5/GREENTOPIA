@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title> 그린토피아 </title>
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <link rel="icon" href="/img/favicon.ico">
+
+    <!-- Template Stylesheet -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+
+</head>
+<body>
+<header th:replace="fragment/header"></header>
+
+<th:block layout:fragment="content"></th:block>
+
+<footer th:replace="fragment/footer"></footer>
+</body>
+</html>
